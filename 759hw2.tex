@@ -1,0 +1,186 @@
+\documentclass[11pt]{article}
+%you can look for fun LaTeX packages to use hereasdf
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{amsthm}
+
+\usepackage{graphicx}
+\usepackage{dcolumn}
+\usepackage{bm}
+
+%fun commands for fun sets
+%make sure to use these in math mode
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\m}{\mathcal{M}}
+\newcommand{\tT}{\mathcal{T}}
+\newcommand{\pa}{\partial}
+\newcommand{\dD}{\mathcal{D}}
+
+
+
+\oddsidemargin0cm
+\topmargin-2cm    
+\textwidth16.5cm   
+\textheight23.5cm  
+
+\newcommand{\question}[2] {\vspace{.25in} \hrule\vspace{0.5em}
+\noindent{\bf #1: #2} \vspace{0.5em}
+\hrule \vspace{.10in}}
+\renewcommand{\part}[1] {\vspace{.10in} {\bf (#1)}}
+
+\newcommand{\myname}{Alex Havrilla}
+\newcommand{\myandrew}{alumhavr}
+\newcommand{\myhwnum}{Hw 2}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+ 
+\pagestyle{fancyplain}
+\lhead{\fancyplain{}{\textbf{HW\myhwnum}}}      % Note the different brackets!
+\rhead{\fancyplain{}{\myname\\ \myandrew}}
+\chead{\fancyplain{}{\mycourse}}
+
+\linespread{1.3}
+
+\begin{document}
+
+\medskip                        
+
+\thispagestyle{plain}
+\begin{center}
+
+{\myname}
+
+\myandrew
+
+\myhwnum
+
+\end{center}
+
+
+
+\question{Question 1}
+
+
+Set $X : \m \to \tT \m$ a vector field, continuous. 
+
+\textbf{Claim:} The following are equivalent:
+
+i) X is a smooth vector field
+
+ii) $\forall p \in \m$ ther exists $(U,\phi)$ containing p s.t. on $\Omega = \phi(U)$ we have $X = \sum_i^d a^i \frac{\partial}{\partial x_i}$
+
+for smooth $a^i : \Omega \to \R$
+
+iii) For every $f \in C^{\infty}(\m), X[f]$ is smooth.
+
+\begin{proof}
+
+Note $X(p) = (p,\sum a^i(p)\frac{\partial}{\partial x_i})$. Further for chart $\psi: U \to \Omega \subseteq \tT \m$ we know $\psi^{-1}((p,v)) = (\psi^{-1}_{\m}(p),\psi^{-1}_{\tT_p \m}(v))$ where $\psi^{-1}_{\m}$ is some chart on $\m$. Thus it suffices to show the second coordinate smooth when composed(in order to show smoothness of X).
+
+We prove $i) \iff ii)$ and $i) \iff iii)$. 
+
+First we show $i) \iff ii)$. Suppose the $a^i$ are smooth. Then X is a sum of smooth function and is thus smooth(since the $\frac{\partial}{\partial x_i}$ are smoothly transitioning). Suppose $X$ smooth. Note in particular then $\psi^{-1}(\sum a^i\partial/\partial x_i\circ \phi$ smooth for charts $\psi^{-1}$ and $\phi$. Breaking $\psi^{-1}$ into components $\psi^{-1}_j$ shows each component smooth and hence each $a^i$ smooth. 
+
+Now we do $i) \iff iii)$. If X is smooth then we know each $a^i$ is smooth and hence $X[f] = \sum a^i \frac{\partial f}{\partial x_i}$ is a sum of product of smooth functions. Note $\partial f/\partial x_i$ smooth since f smooth. However if each $X[f]$ smooth we know $X[x_i] = a^i$ are smooth and so by $i) \iff ii)$ we have $X$ smooth. 
+
+\end{proof}
+
+
+\question{Question 2}
+
+
+Let $V \in \mathcal{X}(\m)$ and $p \in \m$. Assume $V(p) \neq 0$. 
+
+\textbf{Claim:} There exists a coordinate chart $(U,\phi)$ containing $p$ s.t. on $\Omega = \phi(U)$ $V = \frac{\partial}{\partial x_1}$
+
+\begin{proof}
+
+We can choose some chart $(\phi,U)$ s.t. $X(p) = \frac{\partial }{\partial x_1}$ at the point via a change of basis(which is possible since $X(p) \neq 0$ and we have a change of basis formula). 
+
+%How do know such a satisfying chart exists?
+
+ We have $\phi : U \subseteq \R^n \to M$ with $\Omega = \phi(U)$ without loss f generality centered at the origin($\phi(0) = p)$. We find a chart and open set $W$ satisfying $X = \frac{\partial}{\partial x_1}$. To do this we use flow defined via X as $\Phi_t(p) = \gamma(t)$ where $\gamma$ solves $\gamma'(t) = X(\gamma(t))$. Set $W = \{p \in \Omega : \phi^{-1}(p)_1 = 0\}$. Then considera map f given by $x \to \phi_{x^1}(0,x^2,...,x^n)$. The idea is to flow out from this hyperplane along the vector field(which is $\frac{\partial}{\partial x_1}$ at the point p). However geometrically we only ever flow along $\frac{\partial}{\partial x_1}$ since we start at p with $f(0) = p$. So within the image $\widehat{\Omega}$ we have $X = \frac{\partial}{\partial x_1}$. So we must simply argue this is a valid parameterization. Bijectivity is clear via definition of the flow. To argue smoothness we use inverse function theorem at $0$. Recall that the derivative of the solution to our flow is $X(\gamma(t))$ where we know $X = \frac{\partial}{\partial x_1}$ at 0. Thus we may apply inverse function theorem showing smoothness and inverse smoothness.
+
+ %Need to argue valid parameterization
+
+\end{proof}
+
+
+\question{Question 3}
+
+Let $(G,\cdot)$ be a group, $\m$ a manifold and $\phi : G \times \m \to \m$ a properly discontinuous action.
+
+\textbf{Claim:} $\m \backslash G$ is orientable $\iff$ $\exists$ an orientation of $\m$ that is preserved by all $\phi_g : \m \to \m$ for all $g \in G$.
+
+\begin{proof}
+
+First suppose $\m M\backslash G$ is orientable. For arbitrary charts on $\m \backslash G$ we can write $\pi \circ \phi$ for charts on $\m$ since locally the projection operator will be bijective since the action properly discontinuous. So then we know for overlapping charts $|D(\pi \circ \psi)^{-1} \circ (\pi \circ \phi)| > 0$ given the correct orientation. Further we know for fixed $\phi, \psi$, $(\pi \circ \psi)^{-1} \circ (\pi \circ \phi) = \psi^{-1}\circ f_g \circ \phi$ for some diffeomorphism $f_g : \m \to \m$ again via proper discontinuity. So we have for some $g \in G$, $|D \psi^{-1} f_g \phi | > 0$. Note also for arbitrary well-defined (overlapping) composition $\psi^{-1} \circ f_g \circ \phi$ we know this corresponds to a composition of charts on $\m \backslash G$ via $(\pi \circ \psi)^{-1} \circ (\pi \circ \phi)$ where $(\pi \circ \psi)^{-1}$ is defined via $f_g$ with $\pi$ pulling back to element which is in the image of $f_g$(well-defined via proper discontinuity). Thus since we can do this for arbitrary composition, we know $|D\psi^{-1} \circ f_g \circ \phi| > 0$ and we are done.  
+
+%How do I get all f_g?
+
+In the other direction suppose we have an orientation of $\m$ which is preserved by all $f_g : \m \to \m, g \in G$. Then we know for arbitrary $g \in G$ and $\phi$, $\psi$ s.t. $f_g \circ \phi$ overaps with $\psi$ we have $|D \psi^{-1}\circ f_g \circ \phi| > 0$ without loss of generality. But as described above this is exactly the condition showing orientation of $\m \backslash G$. So we take the atlas $\{\pi \circ \phi : \phi \in A_{\m}\}$ which produces an orientation on $\m \backslash G$.
+
+\end{proof}
+
+\textbf{Claim:} $\mathbb{P}^2$ is non-orientable, $\mathbb{P}^3$ is orientable
+
+\begin{proof}
+
+	First note $\mathbb{P}^3$ orientable because we can find an atlas giving $\mathbb{S}^3$ orientation invariant under multiplication by $-1$. Namely the one given via sterographic projection. Then for arbitrary $\phi, \psi^{-1}$ we know $|D \psi^{-1} (-\phi)| = (-1)^{n+1}|D\psi^{-1}\circ \phi| > 0$ since $n=3$. So by the above proof we know $\mathbb{P}^3$ orientable. Yet we see for the same reason that $|D\psi^{-1} (-\phi)| = (-1)^3|D\psi^{-1}\circ \phi| < 0$ for $\mathbb{S}^2$ which flips the orientation and thus $\mathbb{P}^2$ is not orientable
+
+
+\end{proof}
+
+
+\question{Question 4}
+
+
+Set $\m = SL(n)$. Then $sl(n) = T_I SL(n)$. 
+
+\textbf{Claim:} $[[A,B]] = AB-BA$ for $A,Y \in sl(n)$.
+
+\begin{proof}
+
+Compute $[[A,B]] = [X_A,Y_B]|_I= (X_AY_B - Y_BX_A)|_I$ where $X_A,Y_B$ are the left invariant vector fields corresponding to $A,B$ and I is the identity matrix which is the identitiy element of $SL(n)$. We write $X_A(M) = dL_M (A)$ and evaluated on a function is $dL_M(A)[f] = A[f \circ L_M] = A[f M] = \langle \nabla f M, A\rangle = \langle (\nabla f M), MA\rangle$ which justifies $dL_M(A) = M^TA$(which still has trace 0). So
+
+\[
+	(X_AY_B - Y_BX_A)|_I = X_AY_B|_I - Y_BX_A|_I =
+\]
+\[
+	X_A(IB) - Y_B(IA) = X_A(B)-Y_B(A) = AB - BA
+\]
+
+as desired
+
+\end{proof}
+
+
+\question{Question 5}
+
+%Exponential Map should coincide with exponential function for matrices:
+
+i) 
+
+First we compute the exponential map $exp : sl(n) \to SL(n)$. 
+
+We know $\gamma'(t) = X(\gamma(t)) = dL_{\gamma(t)}(X_e)$ but we have $dL_{\gamma(t)}(X_e) = X_e \gamma(t)$ from problem 4 which suggests $\gamma(t) =  e^{X_et}$ via ODE theory. So then $exp(X_e) = \gamma(1) = e^{X_e} = \sum_{k=1}^{\infty} \frac{X_e^k}{k!}$
+
+ii)
+
+
+\textbf{Claim:} For every lie group G there exists an open neighborhood U of 0 in $g$ s.t. $\Omega = exp(U)$ is an open neighborhood of e and furthermore $exp: U \to \Omega$ is a diffeomorphism.
+
+\begin{proof}
+
+Chain rule tells us $exp(tX) = \gamma(t) \implies exp(0) = \gamma(0) = e$. We use implicit function theorem to show a diffeomorphism since the differential of an exponential map is nonzero at 0(invertible).
+
+\end{proof}
+
+\end{document}
+

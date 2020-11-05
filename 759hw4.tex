@@ -1,0 +1,303 @@
+\documentclass[11pt]{article}
+%you can look for fun LaTeX packages to use hereasdf
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{amsthm}
+
+\usepackage{graphicx}
+\usepackage{dcolumn}
+\usepackage{bm}
+
+%fun commands for fun sets
+%make sure to use these in math mode
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\m}{\mathcal{M}}
+\newcommand{\Tt}{\mathcal{T}}
+\newcommand{\pa}{\partial}
+\newcommand{\Dd}{\mathcal{D}}
+\newcommand{\del}{\partial}
+
+
+
+\oddsidemargin0cm
+\topmargin-2cm    
+\textwidth16.5cm   
+\textheight23.5cm  
+
+\newcommand{\question}[2] {\vspace{.25in} \hrule\vspace{0.5em}
+\noindent{\bf #1: #2} \vspace{0.5em}
+\hrule \vspace{.10in}}
+\renewcommand{\part}[1] {\vspace{.10in} {\bf (#1)}}
+
+\newcommand{\myname}{Alex Havrilla}
+\newcommand{\myandrew}{alumhavr}
+\newcommand{\myhwnum}{Hw 4}
+
+\newtheorem{prop}{Prop}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+ 
+\pagestyle{fancyplain}
+\lhead{\fancyplain{}{\textbf{HW\myhwnum}}}      % Note the different brackets!
+\rhead{\fancyplain{}{\myname\\ \myandrew}}
+\chead{\fancyplain{}{\mycourse}}
+
+\linespread{1.3}
+
+\begin{document}
+
+\medskip                        
+
+\thispagestyle{plain}
+\begin{center}
+
+{\myname}
+
+\myandrew
+
+\myhwnum
+
+\end{center}
+
+\question{Question 1}
+
+%!Maybe change the direction in which I compute the change of basis
+
+\begin{prop}
+	A manifold $\m$ is orientable $\iff$ it has a volume form.
+\end{prop}
+
+\begin{proof}
+	Suppose $\omega$ is a volume form on $\m$. Then we know at a point $p \in \m$ we can locally write $\omega = f dx_1 \wedge ... \wedge dx_n$ for some $f \neq 0$. Further without loss of generality we may assume $f > 0$ as otherwise we can change our coordinate $\phi$ with inverses $\phi^{-1} = (x_1,...,x_n)$ s.t. $\hat{\phi}^{-1} = (-x_1,...,x_n)$. Then if we have two overlapping charts $\phi$, $\psi$ with locally $\omega = f dx_1 \wedge .. \wedge dx_n$, $\omega = g dy_1\wedge ... \wedge dy_n$.
+
+	\begin{align*}
+		0 < \frac{1}{n!} g = \omega(\frac{\partial}{\partial y_1},...,\frac{\partial}{\partial y_n}) = f\frac{1}{n!} \sum_{\sigma \in S_n} sgn(\sigma) \prod_j dx_j(\frac{\partial}{\partial y_{\sigma_j}}) = \frac{1}{n!}f \sum_{\sigma \in S_n} sgn(\sigma) \prod_j \frac{\partial x_i}{\partial y_{\sigma_j}}= \frac{1}{n!}f |\frac{\partial x}{\partial y}| 
+	\end{align*}
+
+	so we must have $|\frac{\partial x}{\partial y}| = |D (\phi^{-1}\circ \psi)| > 0$ as desired. Hence $\m$ is orientable.
+
+	Now suppose $\m$ is orientable. We seek to construct a volume form. Fix $p \in \m$ with local chart $(U,\phi)$. We locally define $\omega = dx_1 \wedge ... \wedge dx_n$ on this chart. Note locally then clearly $\omega$ is not vanishing. It suffices to show this is well-defined globally. Pick a locally finite parition of unity $\{\chi_{\alpha}\}$ subordinate to the open cover $\{U_{\alpha}\}$ defined by the charts. %Why can we find this parition of unity? : Some proof involving paracompact spaces
+	Now define global $\omega$ via $\omega = \sum_{\alpha} \chi_{\alpha} \omega_{\alpha}$ where the $\omega_{\alpha}$ defined locally over charts. Note this is well defined via the local finiteness of the partition of unity. It suffices to compute at some $p \in \m$ with some chart $(\phi,U)$,
+
+	%Orientedness of manifold ensures way in which we measure vectors does not negate each other locally
+	\begin{align*}
+		\omega(\frac{\partial}{\partial x_1},...,\frac{\partial}{\partial x_n}) &= \sum_{\alpha} \chi_{\alpha}(p) \omega_{\alpha}(\frac{\partial}{\partial x_1},...,\frac{\partial}{\partial x_n}) = \sum_i \chi_{i}(p) \omega_{i}(\frac{\partial}{\partial x_1},...,\frac{\partial}{\partial x_n}) = \\
+		\sum_i \chi_{i}(p) \frac{1}{n!}|\frac{\partial yi}{\partial x}| > 0
+	\end{align*}
+
+	where we know each $|\frac{\partial yi}{\partial x}| > 0$ via orientability
+\end{proof}
+
+\question{Question 2}
+
+Define $\m$ and $\omega$ as given. We compute $\int_{\m} \omega$ in two ways.
+
+
+
+%?Really don't understand formalisms that go into making this okay?
+
+To integrate over $\m$ directly we aim to find a parameterization of $S^3 \backslash T^2$. (Unfortunately I didn't think of one). But assuming we did have one we would compute the Jacobian and make the change of variables similar to as done below when integrating over the torus.
+
+Then we compute the integral over the torus. Note $\omega = d\alpha$ where $\alpha = x_1x_2 dx_2 \wedge dx_4$. Then
+
+%?Why is boundary of quotient T^2 ?
+
+\begin{align*}
+	\int_{\m} \omega = \int_{\m} d\alpha = \int_{T^2} \alpha
+\end{align*}
+
+via stokes. Now we consider the parameterization of $T^2$ in $\R^4$ given by $(\theta,\phi) \to (cos(\theta),sin(\theta),cos(\phi),sin(\phi))$. Computing the Jacobian we have
+
+\begin{align*}
+	\begin{bmatrix}
+		- sin(\theta) & 0\\
+		cos(\theta) & 0 \\
+		0 & -sin(\phi) \\
+		0 & cos(\phi)
+	\end{bmatrix}
+\end{align*}
+
+which suggets $dx_2 = cos(\theta)d\theta$ and $dx_4 = cos(\phi)d\phi$. 
+
+ Then
+
+\begin{align*}
+	\int_{T^2} \alpha = \int_{T^2} x_1x_3 dx_2\wedge dx_4 = \int_0^{2\pi}\int_0^{2\pi} cos(\theta)cos(\phi)cos(\theta)cos(\phi)d\theta d\phi = (\int_0^{2\pi}cos(\theta)d\theta)^2 = \pi^2
+\end{align*}
+
+\question{Question 3}
+
+\begin{prop}
+	$T^n := \R^n \backslash \Z^n$ isometrically embedds into $\R^{2n}$
+\end{prop}
+
+\begin{proof}
+	We suggest the isometry $F : T^n \to \R^{2n}$ via 
+	\begin{align*}
+		F(x_1,...,x_n) = (sin( x_1),cos( x_1),...,sin( x_n),cos( x_n))
+	\end{align*}
+
+	where we identify the torus with euclidean $[0,1)^n$. Note immediately F is smooth, since the components are smooth, and bijective on its image. Injectivity in particular comes from injectivity of the pair $(sin( x_i,cos x_i))$ on $[0,1)$.
+	%Do I need a diffeomorphism here? -> I think techincally yes but in this case is just identity: The charts are just the identity since we're going around circles
+	Computing the jacobian we have $DF$ as 
+	\begin{align*}
+		\begin{bmatrix}
+			 cos( x_1) & 0 & \hdots  & 0 \\
+			- sin( x_1) & 0 & \hdots   & 0 \\
+			0 &  cos(i x_2) & \hdots  & 0  \\
+			0 &  sin(i x_2) & \hdots  & 0  \\
+			\vdots & \hdots \\
+			0 & \hdots & 0 &  cos( x_n)\\
+			0 & \hdots & 0 & - sin( x_n)
+		\end{bmatrix}
+	\end{align*}
+
+	which is clearly always full rank. This is an immersion. But we know the torus is compact so in fact we have an embedding, since injective immersions are embeddings. Further this can be made an isometry by endowing $T^n$ with the metric pulled back from $R^{2n}$, ie. $g(u,v) = \langle dF u, df v\rangle$. Further note this agrees with the inherited metric from $\R^n$, since $\langle dF v,dFv\rangle = \langle DF u,Df v\rangle = \sum_i cos(x_i)^2v_i+sin(x_i)^2v_i = \sum_i v_i^2 = \langle v ,v\rangle$
+
+	%?Do I need to identify this with the Riemannian metric inherited from R^n?
+	%?Assume default inner product?
+\end{proof}
+
+\question{Question 4}
+
+\begin{prop}
+	The helicoid $H$ and catenoid $C$ are locally isometric but not globally isometric.
+\end{prop}
+
+\begin{proof}
+	%Since we can only use open sets for parameterization we missing something? Is this where locality comes in?
+	First we show the local isometry. We parameterize our catenoid and helicoid via $\phi : (0,2\pi) \times \R \to C$ and $\psi : (0,2\pi) \times \R \to H$ respectively: 
+
+	\begin{align*}
+		&\phi(a,b) = (cosh(b)cos(a),cosh(b)sin(a),b)\\
+		&\psi(c,d) = (d cos(c),dsin(c),c)
+	\end{align*} 
+
+	except we reparameterize $H$ s.t. $a=c$, $d = sinh(b)$. So write $\psi(a,b) = (sinh(b)cos(a),sinh(b)sin(a),b)$. Note this is bijective. %Why is this valid? How do we know the inverses are smooth? Implicit function theorem?
+
+	We then have the map $f : C \to H$ via $f(p) = \psi \circ \phi^{-1}(p)$. We must show f a local isometry. Note it cannot be a (global) isometry as it is not surjective(it is injective). We know $\frac{\partial \phi}{\partial a}|_p, \frac{\partial \phi}{\partial b}|_p$ act as a basis for $T_p C$ and similarly in terms of $\psi$ for tangent spaces in H. Compute:
+
+	\begin{align*}
+		&\frac{\partial \phi}{\partial a} = (-cosh(b)sin(a),cosh(b)cos(a),0)\\
+		&\frac{\partial \phi}{\partial b} = (sinh(b)cos(a),sinh(b)cos(a),1)\\
+		&\frac{\partial \psi}{\partial a} = (-sinh(b)sin(a),sinh(b)cos(a),0)\\
+		&\frac{\partial \pi}{\partial b} = (cosh(b)cos(a),cosh(b)sin(a),1)
+	\end{align*}
+	A curve $\gamma(t) = (a(t),b(t))$ so that $\phi(\gamma(t)) = \phi(a(t),b(t))$ and $\frac{d}{dt}\phi \circ \gamma(t)|_0 =\frac{d}{dt}\phi \circ (a(t),b(t))|_0 = a'(0)\frac{\partial \phi}{\partial a}+b'(0)\frac{\partial \phi}{\partial b}$. So compute the metrics:
+
+	For $v \in T_pC$
+	\begin{align*}
+		g(v,v) &= g(a'(0)\frac{\partial \phi}{\partial a}+b'(0)\frac{\partial \phi}{\partial b},a'(0)\frac{\partial \phi}{\partial a}+b'(0)\frac{\partial \phi}{\partial b}) = a'(0)^2\langle \frac{\partial \phi}{\partial a},\frac{\partial \phi}{\partial a}\rangle + 2a'(0)b'(0)\langle \frac{\partial \phi}{\partial a},\frac{\partial \phi}{\partial b}\rangle + b'(0)^2\langle \frac{\partial \phi}{\partial b},\frac{\partial \phi}{\partial b}\rangle\\
+		&=a'(0)cosh^2(b) + b'(0)cosh^2(b)
+	\end{align*}
+
+	For $v \in T_pC$ we compute $df(v)$ as
+	\begin{align*}
+		df(v) = v[f] = \frac{d}{dt}|_0 f(\phi(\alpha(t))) = \frac{d}{dt}|_0 \psi \circ \phi^{-1} \circ \phi \circ \alpha (t) = \frac{d}{dt}|_0 \psi \circ  \alpha (t) = a'(0)\frac{\del \psi}{\del a} + b'(0) \frac{\del \psi}{\del b}
+	\end{align*}
+
+	Note this is clearly injective via linear independence of $\frac{\del \psi}{\del a},\frac{\del \psi}{\del b}$. So it suffices to compute the pullback of the metric on H at a point p:
+
+	\begin{align*}
+		\langle df(v),df(v)\rangle &= \langle a'(0)\frac{\del \psi}{\del a} + b'(0) \frac{\del \psi}{\del b}, a'(0)\frac{\del \psi}{\del a} + b'(0) \frac{\del \psi}{\del b} \rangle = a'(0)^2cosh^2(b) + b'(0)^2cosh^2(b)
+	\end{align*}
+
+	as desired.
+
+	%Note equivalence for all products(not just norm) established at bottom of stack exchange post
+
+%How do we know what the metrics are? - How do we know it's the regular inner product?
+%Why are the surfaces not globally isometric?
+
+\end{proof}
+
+\question{Question 5}
+
+Define $G : \R^{n+1} \to \R$ and H a hypersurface as given. 
+
+\begin{prop}
+	$(H,g)$ is a Riemann manifold.
+\end{prop}
+
+*Note: $\sum_i x_i$ index starting from $i=1$
+
+\begin{proof}
+	Note $\nabla f(x) = \nabla G(x,x) = -2x_0 + ... + 2x_n$ which is 0 only when x is 0. So we see $H$ as a $n$ dimensional surface and which is the preimage of the regular value $-1$ of G and is hence a manifold(it is still manifold after intersecting with the hyperplane $x_0 > 0$ since around each point we can still find a chart). So it suffices to show $g$ is a Riemann metric.
+
+	Clearly $G(v_1,v_2) = G(v_2,v_1)$ ie. symmetry holds. So we must show positive definiteness. In particular we seek to show for $\forall v \neq 0$
+
+	\begin{align*}
+		0 < g(v,v) = -v_0^2 + \sum_i v_i^2 \iff v_0^2 < \sum_i v_i^2
+	\end{align*}
+
+	 Writing $0 = C(x) = -x_0^2+\sum_i x_i^2 +1$ we see the gradient, ie. normal to our surface is $\nabla C(x) = \langle -2x_0,...,2x_n\rangle^T$. Then for a point $x \in H$, we know for $v\in T_xH$ $\nabla C(x) \cdot v = 0$ ie. 
+	\begin{align*}
+		-x_0v_0 + \sum_i x_iv_i = 0 \iff v_0 = \frac{1}{x_0} \sum_i x_iv_i \iff v_0^2 = \frac{1}{x_0^2}(\sum_i x_iv_i)^2
+	\end{align*}
+
+	Applying cauchy-schwarz to the sum yields
+	\begin{align*}
+		v_0^2 \leq \frac{1}{x_0^2} \sum_i x_i^2 \sum_i v_i^2 \implies v_0^2 <
+		 \sum_i v_i^2 
+	\end{align*}
+
+	where we recall $x_0^2 = 1+ \sum_i x_i^2$ and hence since $x_0>0$, $\frac{1}{x_0^2} \sum_i x_i^2 < 1$. This finishes the proof.
+
+	%These are hyperboloids
+\end{proof}
+
+Now define f, $\tilde{g}$ as given. 
+
+\begin{prop}
+	f is a diffeomorphism from H to the unit disk. Further 
+	\begin{align*}
+		\tilde{g}(v,v) = \frac{C}{(1-|y|^2)^2}v \cdot v
+	\end{align*}
+	for some $C > 0$. %!Find C
+\end{prop}
+
+\begin{proof}
+	First compute
+	\begin{align*}
+		&G(x-s,x-s) = -x_0^2-2x_0-1 +\sum_ix_i^2 = -2x_0-2\\
+		&x_0 = \sqrt{1+\sum_i x_i^2}
+	\end{align*}
+
+	recalling $x_0 > 0$. 
+
+	Then for some $x \in H$ compute
+	\begin{align*}
+		f(x) = \Pi_n(s - \frac{2(x-s)}{-2x_0-2}) = \Pi_n(s + \frac{(x-s)}{x_0+1}) = \frac{1}{x_0+1}(x_1,...,x_n)
+	\end{align*}
+
+	which is certainly in $B(0,1)$. Since $x_0 +1 > 0$ the function is smooth as it is the componentwise composition of products of smooth functions. Further it's clearly injective and thus surjective onto its image, which is $B(0,1)$ as $x_1,...,x_n$ get arbitrarily large we pick $x_0$ accordingly. Thus bijective. And the inverse compute via $(x_1,...,x_n) \to (\sqrt{1+\sum_i x_i^2},x_1,...,x_n)$ is also smooth. Hence we have a diffeomorphism.
+
+	We compute the Jacobian of $f^{-1}$ as 
+
+	\begin{align*}
+		\begin{bmatrix}
+			\frac{x_1}{\sqrt{1+\sum_i x_i^2}} & \hdots & \hdots & \frac{x_n}{\sqrt{1+\sum_i x_i^2}} \\
+			1 & 0 & 0 & \hdots \\
+			\vdots \\
+			0 & 0 & \hdots & 1
+		\end{bmatrix}
+	\end{align*}
+
+	Then $df^{-1}v = (\frac{\sum x_i v_i}{\sqrt{1+\sum_i x_i^2}},v_1,...,v_n)$
+
+	We compute the pullback for $v \in \R^n$ as 
+	\begin{align*}
+		\tilde{g}(v,v) &= (f^{-1})^*g(v,v) = g(df^{-1},df^{-1}) = g((\frac{\sum x_i v_i}{\sqrt{1+\sum_i x_i^2}},v_1,...,v_n),(\frac{\sum x_i v_i}{\sqrt{1+\sum_i x_i^2}},v_1,...,v_n)) \\
+		&= -\frac{(\sum x_i v_i)^2}{1+ \sum x_i} + \sum v_i^2
+	\end{align*}
+
+\end{proof}
+
+\end{document}
+

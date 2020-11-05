@@ -1,0 +1,192 @@
+\documentclass[11pt]{article}
+%you can look for fun LaTeX packages to use hereasdf
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{amsthm}
+
+\usepackage{graphicx}
+\usepackage{dcolumn}
+\usepackage{bm}
+
+%fun commands for fun sets
+%make sure to use these in math mode
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\m}{\mathcal{M}}
+\newcommand{\Tt}{\mathcal{T}}
+\newcommand{\pa}{\partial}
+\newcommand{\d}{\mathcal{D}}
+
+
+
+\oddsidemargin0cm
+\topmargin-2cm    
+\textwidth16.5cm   
+\textheight23.5cm  
+
+\newcommand{\question}[2] {\vspace{.25in} \hrule\vspace{0.5em}
+\noindent{\bf #1: #2} \vspace{0.5em}
+\hrule \vspace{.10in}}
+\renewcommand{\part}[1] {\vspace{.10in} {\bf (#1)}}
+
+\newcommand{\myname}{Alex Havrilla}
+\newcommand{\myandrew}{alumhavr}
+\newcommand{\myhwnum}{Hw 1}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+ 
+\pagestyle{fancyplain}
+\lhead{\fancyplain{}{\textbf{HW\myhwnum}}}      % Note the different brackets!
+\rhead{\fancyplain{}{\myname\\ \myandrew}}
+\chead{\fancyplain{}{\mycourse}}
+
+\linespread{1.3}
+
+\begin{document}
+
+\medskip                        
+
+\thispagestyle{plain}
+\begin{center}
+
+{\myname}
+
+\myandrew
+
+\myhwnum
+
+\end{center}
+
+Presentation Problems: 3,4
+
+
+\question{Question 1}
+
+Let $F : \R^n \to \R$ with $n\geq 2$. 
+
+\textbf{Claim:} For any regular $\alpha$, $\mathcal{M}_{\alpha}$ is a differentiable manifold.
+
+Note $x_j$ denotes the first j components of x.
+
+\begin{proof}
+
+Let $x \in \R^n$ with $F(x) = \alpha$. Because $Df(x) \neq 0$ by assumption we know there exist coordinate $i$ with $Df(x)_i \neq 0$. Without loss of generality suppose this is the nth coordinate. The implicit function theorem tells us there exists open $U \subseteq \R^n$ and $g_x : \R^{n-1} \to \R$ s.t. for $y \in U$, $f(y_{n-1},g_x(y_{n-1})) = \alpha$ with $g_x$ continuous, differentiable and $g_x(x_{n-1}) = x^n$. Define $\phi_x : U \subseteq \R^{n-1} \to \phi_x(U)$ via $\phi_x(y) = (y,g_x(y))$. Via sequential continuity we have this mapping is continuous under the subset topologuy. Note this is injective, so therefore bijective. Further the inverse $\phi_x^{-1} : \phi_x(U) \to U$ via $\phi_x^{-1}(y) = y_{n-1}$ a projection and hence continouous. This establishes a homeomorphism, and since x arbitrary, shows $\m$ a manifold.
+
+Finally we check that $\phi^{-1}\circ \psi : \R^{n-1} \to \R^{n-1}$ is differentiable for overlapping domains. Compute $\phi^{-1}(\psi(x)) = \phi((x,g(x))) = x$ ie. the identity. Clearly this is differentiable.
+
+\end{proof}
+
+Note this directly generalizes via the Implict Function Theorem to the case $F: \R^n \to \R^m$ with $m < n$ and the jacobian is of rank m. 
+
+\textbf{Claim:} $\mathcal{M}_{\alpha}$ is orientable.
+
+\begin{proof}
+
+As computed above the composition of two overlapping maps is the identity. It has identity matrix as the jacobian and which has positiv determinant and therefore orientable.
+
+\end{proof}
+
+
+\question{Question 2}
+
+%This does not work
+
+\textbf{Claim:} $O(n)$ is a differentiable manifold when viewed as a subset of $\R^{n^2}$
+
+\begin{proof}
+
+We prove this using the theorem proved above in the more general case $F : \R^n \to \R^m$. Consider the function $f : \R^{n\times n} \to \R^{{n \choose 2}}$ defined via $f(M) = M^TM$(a function into the symmetric matrices). See that $f(M) = I \iff M^T = M^{-1}$ ie. is orthogonal. So it suffices to show $I$ is a regular value of f. To do so we show the jacobian of f has maximal rank when M orthogonal.
+
+Examining the directional derivatives we have $Df(M) V = $
+
+\begin{align*}
+	lim_{t \to 0} \frac{f(M+tV)-f(M)}{t} &= lim \frac{(M^T+tV^T)(M+tV)-M^TM}{t} =\\
+	& lim \frac{M^TM + tM^TV+tV^TM + t^2V^TV - M^TM}{t} = M^TV + V^TM
+\end{align*}
+
+Now note for an orthogonal input U and arbitrary symmetric matrix $S$, $Df(U)(US) = U^TSU + S^TU^TU = S + S = 2 S$ which achieves avery symmetric matrix. Thus DF(M) must have rank at least ${n \choose 2}$. This concludes the proof.
+
+The dimension of $O(n)$ is then $n^2 - {n \choose 2} = n(n-1)/2$ since this is the dimension of the inverse projection.
+
+\end{proof}
+
+
+\question{Question 3}
+
+%Should be relationship between a_i and b_i, not a_i and b_j?
+%Basically a change of basis
+
+***I could present this one***
+
+\textbf{Claim:} If $v_{\gamma} \in \Tt_p \m$ is given in the chart $(U,\phi)$, as $a^1 \frac{\partial}{\partial x_1}(p) + ... + a^n\frac{\partial}{\partial x_n}(p)$ and in the chart $(V,\psi)$ as $b^1 \frac{\partial}{\partial y_1}(p) + ... + b^n\frac{\partial}{\partial y_n}(p)$ satisfies
+
+\begin{proof}
+	Recall $a^i = \frac{\pa(\phi^{-1}\circ \gamma)_i}{\pa t}|_{t=0}$ and $b^i = \frac{\pa (\psi^{-1}\circ \gamma)_i}{\pa t}|_{t=0}$. Then compute
+
+	\begin{align*}
+		\frac{\pa (\phi^{-1}\circ \gamma)}{\pa t}|_{t=0} = \frac{\pa (\phi^{-1}\circ \psi \circ \psi^{-1} \circ \gamma)}{\pa t}|_{t=0} = D \phi^{-1}\circ \psi_{\psi^{-1}(\gamma(0))} \frac{\pa \psi^{-1} \circ \gamma}{\pa t}|_{t=0}
+	\end{align*}
+
+	Note that by definition the first term $D \phi^{-1}\psi_{\psi^{-1}(\gamma(0))}$. If we look at the ith component of the expression we find this to be $a^i$. Yet the ith component of $\frac{\pa \psi^{-1} \circ \gamma}{\pa t}|_{t=0}$ is $b^i$. So the change of basis is given by the matrix $D \phi^{-1}\psi_{\psi^{-1}(\gamma(0))}$. 
+\end{proof}
+
+\question{Question 4}
+
+***I could present this one***
+
+\textbf{Claim:} Suppose $\m$ is a connected manifold and $f : \m \to \R$ s.t. $df = 0$ everywhere on $\m$. Then $f$ is constant function
+
+\begin{proof}
+
+If $df = 0$ we have $\forall p \in \m$ $df|_p = 0$ ie. $\forall v_{\gamma} \in \Tt_p \m$ $df|_p [v] = 0$ or $v_{\gamma}[f] = \frac{\pa f \circ \gamma}{\pa t}|_{t=0} = 0$ for arbitrary curve $\gamma$. 
+
+%Comment on how reparameterization can be done
+
+Now consider arbitrary $p \in \m$. Let $\phi : U \to M$ be a chart with $p \in \phi(U)$. Without loss of generality take $U$ to be convex. Select $q \in \phi(U)$. Consider the line connecting $\phi^{-1}(p)$ to $\phi^{-1}(q)$. Then taking the image of this under $\phi$ defines a curve $\gamma$ with $\gamma(0)=p$ and $\gamma(1) =q$(note that if we have any issues with differentiability we can extend the curve by some small amount $\epsilon$). We know $\frac{\pa f \circ \gamma}{\pa t}|_{t=0} = 0$ but the parameterization of this curve is arbitrary, so we may simply reparameterize s.t. all along the curve we see $\frac{\pa f \circ \gamma}{\pa t} = 0$. This tells us $f$ constant along the curve, and in particular $f(p) = f(q)$. But q was arbitrary so we see for all $x,y \in \phi(U)$, $f(x) = f(p) = f(y)$ so f is constant on $\phi(U)$. 
+
+Since this is true for arbitary p we see f is constant in a neighborhood of every point $p \in M$. And then since M is connected, f must be constant on M, since otherwise we could find two open sets U and V disjoint but covering U by taking unions of neighborhoods of points with constant $c_1$ and unions of neighborhoods of poitns with constant $c_2$. 
+
+
+\end{proof}
+
+\question{Question 5}
+
+Try inverse function theorem when looking at inverse
+
+\textbf{Claim:} $f: P^2 \to \R^4$ defined by $f([x],[y],[z]) = (x^2-y^2,xy,xz,yz)$. Then $F$ is an embedding
+
+\begin{proof}
+	Recall $f : P^2 \to \R^4$ is an embedding if F is a homeomorphism between its domain and image and $df_p$ is injective for all $p \in P^2$(F is an immersion).
+
+	Take $p \in P^2$ and compute $dF_p(v_{\gamma}) = v_{\gamma}[f] = \sum a^i \frac{\pa}{\pa x^i}[f] = \sum a^i df_p[\frac{\pa}{\pa x_i}]$. So to compute the injectivity of $df_p$ it suffices to study the standard tangent basis vectors at p. 
+
+	Set $p = ([x],[y],[z])$ and compute $\frac{\pa}{\pa x^i}[f] = \frac{d}{dx^i} f \circ \phi|_{\phi^{-1}(p)} = \frac{d}{dx^i} f(p)$ which is just the $x^i$ partial derivative of f. So we compute the jacobian
+
+	\[
+	\begin{bmatrix}
+		2x & -2y & 0 \\
+		y & x & 0 \\
+		z & 0 & x \\
+		0 & z & y
+	\end{bmatrix}
+	\]
+
+	For $p \in P^2$ we see the column vectors are linearly independent.  This shows injectivity and hence an immersion.
+
+	Now we show f a homeomorphism. Note if $(x^2-y^2,xy,xz,yz) = (a^2-b^2,ab,ac,bc)$ then we know $z^2 = c^2$ everything nonzero. This quickly yields injectivity in the nonzero case. If two components are 0 then injectivity is clear. If only one component is 0 then this is a contradiction. This establishes a bijection. 
+
+	Continuity is clear from sequential convergence. Continuity of the inverse comes from the inverse value theorem.
+
+	Alternatively it is also true every injective immersion of a compact manifold is an embedding. We see this as if $P^2$ compact, then its image under $F$ is compact via continuity. As $F(P^2)$ is a compact subset of $\R^4$ it is closed and bounded. In particular if we look at anly closed subset $C \subseteq P^2$ we know it compact since it is a subset of $P^2$ and hence its image $F(C)$ is compact and hence closed. Thus $F$ itself is a closed map and therfore open. This gives a homeomorphism. 
+
+	%Check out theorem 2.10 in book
+
+\end{proof}
+
+\end{document}
+

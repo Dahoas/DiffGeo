@@ -1,0 +1,120 @@
+\documentclass[11pt]{article}
+%you can look for fun LaTeX packages to use hereasdf
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{amsthm}
+
+\usepackage{graphicx}
+\usepackage{dcolumn}
+\usepackage{bm}
+
+%fun commands for fun sets
+%make sure to use these in math mode
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\m}{\mathcal{M}}
+\newcommand{\Tt}{\mathcal{T}}
+\newcommand{\pa}{\partial}
+\newcommand{\dD}{\mathcal{D}}
+
+
+
+\oddsidemargin0cm
+\topmargin-2cm    
+\textwidth16.5cm   
+\textheight23.5cm  
+
+\newcommand{\question}[2] {\vspace{.25in} \hrule\vspace{0.5em}
+\noindent{\bf #1: #2} \vspace{0.5em}
+\hrule \vspace{.10in}}
+\renewcommand{\part}[1] {\vspace{.10in} {\bf (#1)}}
+
+\newcommand{\myname}{Alex Havrilla}
+\newcommand{\myandrew}{alumhavr}
+\newcommand{\myhwnum}{Hw 2}
+
+\newtheorem{prop}{Prop}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+ 
+\pagestyle{fancyplain}
+\lhead{\fancyplain{}{\textbf{HW\myhwnum}}}      % Note the different brackets!
+\rhead{\fancyplain{}{\myname\\ \myandrew}}
+\chead{\fancyplain{}{\mycourse}}
+
+\linespread{1.3}
+
+\begin{document}
+
+
+\medskip                        
+
+\thispagestyle{plain}
+\begin{center}
+
+{\myname}
+
+\myandrew
+
+\myhwnum
+
+\end{center}
+
+\section{Confusions}
+
+For curve $\gamma$, $\frac{d\gamma}{dt}$ is a Vector Field. Gives the vector corresponding to "direction of curve". At a point p
+
+\begin{align*}
+	\frac{d\gamma}{dt}|_p[f] = \frac{d}{dt}(f \circ \gamma) |_{t = 0}
+\end{align*}
+
+\section{Proofs}
+
+\textbf{Claim:} For $X,Y \in \mathbb{X}(\m)$ for some manifold $\m$, we have
+\[
+	[X,Y] = L_XY
+\]
+
+(Note this means lie derivative produces another vector field)
+
+\begin{proof}
+
+	Let $\Phi_t$ be the flow of X. 
+
+	Recall this is defined as $\Phi: \R \times \m \to \m$ via $\Phi_t(p) = \gamma(t)$ where $\gamma$ solves ODE $\gamma'(t) = X(\gamma(t)), \gamma(0) = p$.(A collection of paths over time flowing along vector field X for some initial condition). (So each vector field produces a flow).
+
+	$\forall g \in \dD$, $X|_p[g] = \frac{d\Phi_t(p)}{dt}|_{t=0}[g] = \frac{d}{dt}_{t=0}g(\phi_t(p))$ which is true by definition of the flow
+
+	Let $\psi_s$ be the flow of Y. For $f \in \dD$ set $H(t,s) = f(\Phi_{-t}(\psi_s(\Phi_t(p))))$(flow forward t along X, then s along Y, then back -t along X). 
+
+	Then $\frac{\partial H}{\partial s}_{(t,0)} = Y|_{\phi_t(p)} [f \circ \phi_{-t}]$ since symbolically this is the same as two lines above(making some substitutions).
+
+	Taking a derivative in t yields $\frac{\partial^2 H}{\partial t \partial s}|_{(0,0)} = \frac{d}{dt}|_{t=0} Y|_{\phi_t(p)}[f \circ \phi_{-t}]$
+
+	But we know $L_XY|_p[f] = \frac{d}{dt}|_{t=0} d\phi_{-t}(Y|_{\phi_t(p)})[f]$.
+
+	Recall the lie derivative is defined as 
+	\[
+		L_X Y|_p = lim_{t\to 0} \frac{d\phi_{-t} Y|_{\phi_t(p)}-Y|_p}{t} = \frac{d}{dt}|_{t=0}d\phi_{-t}(Y_{\phi_t(p)})
+	\]
+	where we measure the change in Y at a point p against flows forward along X. Ie. the change in Y against X
+
+	And $\frac{d}{dt}|_{t=0} d\phi_{-t}(Y|_{\phi_t(p)})[f] = \frac{d}{dt}|_{t=0} Y|_{\phi_t(p)}[f \circ \phi_{-t}]$. So lie derivative is cross term of second derivative of H.
+
+	Then define $K(r,s,t)$ to show cross terms of second derivative of H also equal to lie bracket. 
+
+\end{proof}
+
+
+\begin{prop}\textbf{Levi-Civita}
+	Let $(\m,g)$ be a Riemanian manifold. Then $\exists$ a unique affine connection $\nabla$ which is compatible with $g$ and symmetric. Such connection is called Riemann connection.
+\end{prop}
+
+
+\end{document}
+

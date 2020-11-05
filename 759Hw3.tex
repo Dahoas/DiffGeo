@@ -1,0 +1,335 @@
+\documentclass[11pt]{article}
+%you can look for fun LaTeX packages to use hereasdf
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{amsthm}
+
+\usepackage{graphicx}
+\usepackage{dcolumn}
+\usepackage{bm}
+
+%fun commands for fun sets
+%make sure to use these in math mode
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\m}{\mathcal{M}}
+\newcommand{\tT}{\mathcal{T}}
+\newcommand{\pa}{\partial}
+\newcommand{\dD}{\mathcal{D}}
+
+
+
+\oddsidemargin0cm
+\topmargin-2cm    
+\textwidth16.5cm   
+\textheight23.5cm  
+
+\newcommand{\question}[2] {\vspace{.25in} \hrule\vspace{0.5em}
+\noindent{\bf #1: #2} \vspace{0.5em}
+\hrule \vspace{.10in}}
+\renewcommand{\part}[1] {\vspace{.10in} {\bf (#1)}}
+
+\newcommand{\myname}{Alex Havrilla}
+\newcommand{\myandrew}{alumhavr}
+\newcommand{\myhwnum}{Hw 3}
+
+\newtheorem{prop}{Prop}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+ 
+\pagestyle{fancyplain}
+\lhead{\fancyplain{}{\textbf{HW\myhwnum}}}      % Note the different brackets!
+\rhead{\fancyplain{}{\myname\\ \myandrew}}
+\chead{\fancyplain{}{\mycourse}}
+
+\linespread{1.3}
+
+
+
+\begin{document}
+
+\medskip                        
+
+\thispagestyle{plain}
+\begin{center}
+
+{\myname}
+
+\myandrew
+
+\myhwnum
+
+\end{center}
+
+I could present 3,4
+
+\question{Question 1}
+
+Let $V,W$ be finite dimensional vector spaces. let $L_2(V\times W)$ be set of all bilinear functions from $V \times W \to \R$.
+
+\begin{prop}
+	$(V \otimes W)^* \cong L_2(V \times W) \cong V^* \otimes W^*$
+\end{prop}
+
+\begin{proof}
+	We nearly showed in class $(V \otimes W)^* \cong L_2(V \times W)$. We know for each $f_2 \in L_2(V \times W)$ we can find (unique) $f \in (V \otimes W)^*$ s.t. $f_2 = f \circ \psi$ where $\psi(v,w) = v \otimes w$ and uniqueness coming from $f(v\otimes w) = f_2(v,w) = g_2(v,w) = g(v\otimes w)$. This gives rise the isomorphism $\phi : L_2(V \times W) \to (V \otimes W)^*$ via $\phi(f_2) = f$. It suffices to show this is bijective and linear. To verify linearity compute $\phi(\alpha f_2 + \beta g_2)(v \otimes w) = (\alpha f_2 + \beta g_2)(v,w) = \alpha f_2 (v,w) + \beta g_2(v,w) = \alpha f(v \otimes w) + \beta g(v\otimes w) = \alpha \phi(f_2)(v,w)+\beta \phi(g_2)(v,w)$ which pointwise establishes the desired equality. Clearly the map is injective since the represntation $f$ for arbitrary $f_2$ is unique. Further we can establish an analogus linear injection from $(V\otimes W)^* \to L_2(V \times W)$ via $f \mapsto f_2$ and pointwise $f_2(v,w) = f(v \otimes w)$. Thus we have the dimension of the spaces is the same and our linear injections must be bijections, demontrating an isomorphism.
+
+	Now we show $L_2(V \times W) \cong V^* \otimes W^*$. Define $\phi : V^* \otimes W^* \to L_2(V \times W)$ via $\phi(f \otimes g) = fg$. Note clearly $\phi(f \otimes g)$ is multilinear for linear f,g. Linearity of $\phi$ is achieved by extending linearly now that we have defined $\phi$ for every basis element $f \otimes g$, which is well defined through the multilinearity of the tensor product.%?I seem to be cheating here?
+
+	%We have an injectivity problem: This thing is not injective
+	To show the isomorphism we show the natural basis $\{v_i^* \tensor w_j^*\}$ for $V^* \tensor W^*$ gets mapped to a basis for $L_2(V,\R)$ provided by its identification with its isomorphism with $(V\tensor W)^*$, namely $\{v_i \tensor w_j\}$ for choices of bases $\{v_i\},\{w_j\}$ on V,W. It suffices to show $\phi(v_i^*\tensor w_j^*)(v_k,w_l) = 1$ if $k = i,w = j$ and 0 otherwise. But this is clear as $\phi(v_i^*\tensor w_j^*)(v_k,w_l) = v_i^*(v_k)w_j^*(w_l) = 1 \iff i = k,j=l$ since otherwise either $v_i^*(v_k) = 0$ or $w_j^(w_l) = 0$.
+
+
+	%tensor product literally just tells us what your other arguments are in multilinear function
+\end{proof}
+
+
+\question{Question 2}
+
+%Note tensor product is multilinear and wedge is alternating so we're really taking compositions of multilinear and alternating functions
+
+Let V be a finite dimensional vector space, $Alt_k(V,\R)$ be set of alternating multilinear maps from $V^k$ to $\R$. 
+
+\begin{prop}
+	$\exists$ natural isomorphism showing $\Lambda^k(V^*) \cong Alt_k(V,\R) \cong (\Lambda^k(V))^*$
+\end{prop}
+
+\begin{proof}
+	
+	We show $Alt_k(V,\R) \cong (\Lambda^k(V))^*$. Define $\Phi:Alt_k(V,\R) \to (\Lambda^k(V))^*$ via
+	\begin{align*}
+		\Phi(A)(v_1\wedge ... \wedge v_k) = A(v_1,...,v_k).
+	\end{align*}
+	
+	We see $\Phi(A) \in (\Lambda^k(V))^*$ since $\Phi(A)$ is clearly scalar homogeneous given properties of the wedge product and for additivity it suffices to define on basis vectors and extend linearly.
+
+	Linearity of $\Phi$ is clear since $\Phi(aA + bB)(v_1 \wedge ... \wedge v_k) = (aA + bB) (v_1,...,v_k) = aA(v_1,...,v_k) + bB(v_1,...,v_k)$ pointwise. Furthermore via the universal mapping property we see this corresponding $\Phi(A) \in (\Lambda^k(V))^*$ is unique for each A and hence we have injectivity. Note this uniqueness is because $A$ completely defines $\Phi(A)$ and if $\Phi(A) = \Phi(B)$ then we may conclude $A = B$ since $A(v_1,...,v_k) = \Phi(A)(v_1 \wedge ... \wedge v_k) = \Phi(B) (v_1 \wedge ... \wedge v_k) = B(v_1,...,v_k)$. Since the finite dimension of $Alt_k(V,\R)$ is the same as $(\Lambda^k(V))^*$, ${n \choose k}$, we may conclude surjectivity and establish the isomorphism $\Phi$. Note, one way of seeing the dimension of $Alt_k(V,\R)$ is ${n \choose k}$ is to consider the linear injection from $(\Lambda^k(V))^*$ defined via UMP, where we showed in classed dimension of this space is ${n \choose k}$.
+
+	Now we show $\Lambda^k(V^*) \cong Alt_k(V,\R)$. Consider $\alpha_1 \wedge ... \wedge \alpha_k \in \Lambda^k(V^*)$. We define our isomorphism $\Phi$ pointwise s.t.
+	\[
+		\Phi(\alpha_1 \wedge ... \wedge \alpha_k)(v_1,...,v_k) = \sum_{\sigma \in S_k} sgn(\sigma)\alpha_1(v_{\sigma_1})...\alpha_k(v_{\sigma_k})
+	\]
+
+	First we claim this evluates to an alternating mapping. Compute via a reindexing of the sum
+	\begin{align*}
+		\Phi(\alpha_1 \wedge ... \wedge \alpha_k)(v_{\pi_1},...,v_{\pi_k}) &= \sum_{\sigma \in S_k} sgn(\sigma)\prod_j \alpha_j(v_{\pi_{\sigma_j}}) \\
+		 &= \sum_{\theta \in S_k} sgn(\theta)sgn(\pi)\prod_j \alpha_j(v_{\theta_j}) = sgn(\pi)\Phi(\alpha_1\wedge ... \wedge \alpha_k)(v_1,...,v_k) 
+	\end{align*}
+	Note then we know this is alternating since if $v_i = v_j$ for some $i\neq j$ simply tranpose them and we see $-\Phi(\alpha_1 \wedge ... \wedge \alpha_k) = \Phi(\alpha_1 \wedge ... \wedge \alpha_k)\implies0$. The multilinearity property follows clearly since the valuation is the sum of k-products of linear functions, each one present in every term. 
+
+	Linearity of $\phi$ follows from simply defining pointwise on a basis and extending linearly, which well defined via the alternating nature of the wedge product. %?Does this violate the "canonical" aspect?
+	We show the rest of the isomorphism by showing a basis $\{\alpha_{i_1}^* \wedge ... \wedge \alpha_{i_k}^*\}$ for $\Lambda^k(V^*)$ maps to a basis for $Alt_k(V;\R)$ induced by its isomorphism with $(\Lambda^k(V))^*$ given by $\{(\alpha_{i_1} \wedge ... \wedge \alpha_{i_k})^*\}$. As in prop 1 it suffices to show $\phi(\alpha_{i_1}^* \wedge ... \wedge \alpha_{i_k}^*)(\alpha_{j_1} \wedge ... \wedge \alpha_{j_k}) = 1$ when $i_l = j_l$ for $1 \leq l \leq k$ and 0 otherwise. But this is clear as when $i_l = j_l$ for $1 \leq l \leq k$ the sum over permutations evaluates to 1 with 1 term being 1 and the rest being 0. Otherwise the entire sum evaluates to 0 since at least one term in each of the products with be 0.
+	%?Need to finish this part? Show mapping is isomorphism(bijective and linear). To show surjecivity could just argue injective and same dimension. Could do something similar for injectivity given surjectivity and same dimension. instead of injectivity and surjectivity show two injections(or two surjectionos)
+
+	
+	%Need to finish Show isomorphism
+
+\end{proof}
+
+\question{Question 3}
+
+Let V be a finite dimensional vector space and $V^*$ its dual.
+
+\begin{prop}
+	$(\alpha_1 \wedge ... \wedge \alpha_r) \bigwedge (\alpha_{r+1} \wedge ... \wedge \alpha_{r+s}) = \alpha_1 \wedge ... \wedge \alpha_{r+s}$
+\end{prop}
+
+\begin{proof}
+	We know pointwise we have 
+
+	\[
+		\alpha_1 \wedge ... \wedge \alpha_{r+s} (v_1,...,v_{r+s}) = \sum_{\beta \in S_{r+s}} sgn(\beta)\prod_j \alpha_j(v_{\beta_j})
+	\]
+	
+	so compute
+
+	\begin{align*}
+		r!s!\alpha_1 \wedge .. \wedge \alpha_r &\bigwedge \alpha_{r+1} \wedge .. \wedge \alpha_{r+s}(v_1,..,v_{r+s}) = \sum_{\theta \in S_{r+s}}sgn(\theta) \alpha_1 \wedge .. \wedge \alpha_r(v_{\theta_1},..,v_{\theta_r}) \alpha_{r+1} \wedge .. \wedge \alpha_{r+s}(v_{\theta_{r+1}},..,v_{\theta_{r+s}})\\
+		&=\sum_{\theta \in S_{r+s}}sgn(\theta) \sum_{\pi \in S_{\theta([r])}} sgn(\pi) \prod_{j\leq r}\alpha_j(v_{\pi_{\theta_j}}) \sum_{\sigma \in S_{\theta([r+s]\backslash [r])}} sgn(\sigma) \prod_{j\leq s}\alpha_{r+j}(v_{\sigma_{\theta_{r+j}}})\\
+		&=\sum_{\theta \in S_{r+s}}\sum_{\pi \in S_{\theta([r])}}\sum_{\sigma \in S_{\theta([r+s]\backslash [r])}}sgn(\theta)sgn(\pi)sgn(\sigma)\prod_{j\leq r}\alpha_j(v_{\pi_{\theta_j}})\prod_{j\leq s}\alpha_{r+j}(v_{\sigma_{\theta_{r+j}}})\\
+	\end{align*}
+
+	Fix $\beta \in S_{r+s}$ and consider the term $sgn(\beta)\prod_j \alpha_j(v_{\beta_j})$. The triple sum has $r!s!(r+s)!$ terms and we claim $r!s!$ of these terms are equal to $sgn(\beta)\prod_j \alpha_j(v_{\beta_j})$ for each $\beta \in S_{r+s}$. 
+
+	Suppose $sgn(\beta)\prod_j \alpha_j(v_{\beta_j}) = sgn(\theta)sgn(\pi)sgn(\sigma)\prod_{j\leq r}\alpha_j(v_{\pi_{\theta_j}})\prod_{j\leq s}\alpha_{r+j}(v_{\pi_{\sigma_{r+j}}})$ for some $\theta \in S_{r+s},\pi \in S_{\theta([r])}, \sigma \in S_{\theta([r+s]\backslash [r])}$. Then it must be $\beta = \pi \circ \sigma \circ \theta$, where we extend $\pi,\sigma$ to $S_{r+s}$ via the identity. So in particular $sgn(\beta) = sgn(\pi)sgn(\sigma)sgn(\theta)$. Further for arbitrary $\theta$ we can only have $\beta = \pi \circ \sigma \circ \theta$ for some $\pi,\sigma$ if $\beta([r]) = \theta([r])$ ie. the image of the first r numbers are permutations of each other(in which case we can then find satisfying $\sigma,\pi$). The number of permutations on $S_{r+s}$ satisfying this for $\beta$ is $r!s!$(first we order the image of [r] then we order the other half of the partition). Note further the permutations $\sigma,\pi$ satisfying $\beta = \pi \circ \sigma \circ \theta$ for suitable $\theta$ are unqiue. Hence this shows the claim. We may thus conclude
+
+	\[
+		\sum_{\theta \in S_{r+s}}\sum_{\pi \in S_{\theta([r])}}\sum_{\sigma \in S_{\theta([r+s]\backslash [r])}}sgn(\theta)sgn(\pi)sgn(\sigma)\prod_{j\leq r}\alpha_j(v_{\pi_{\theta_j}})\prod_{j\leq s}\alpha_{r+j}(v_{\sigma_{\theta_{r+j}}}) = \sum_{\beta \in S_{r+s}} r!s!sgn(\beta)\prod_j \alpha_j(v_{\beta_j})
+	\]
+
+	which shows the proposition.
+
+\end{proof}
+
+\question{Question 4}
+
+\begin{prop}
+
+Pull-back of a $(0,s)$ tensor. Let $\Phi : \m \to \mathcal{N}$ be a differentiable mapping and $S$ a $(0,s)$ tensor on $\mathcal{N}$. This satisfies
+
+\begin{enumerate}
+	\item $\Phi^*(S_1 \otimes S_2) = \Phi^*(S_1) \otimes \Phi^*(S_2)$
+	\item $\Phi^*(\omega_1 \wedge \omega_2) = \Phi^*(\omega_1)\wedge \Phi^*(\omega_2)$
+	\item $\Phi^*(d\omega) = d \phi^*(\omega)$
+\end{enumerate}
+
+\end{prop}
+
+\begin{proof}
+
+	First we show $1.$. Let $S_1,S_2$ be tensors forms. Compute for vectors $u_1,...,u_r,v_1,...,v_r$ at an arbitrary point p:
+
+	\begin{align*}
+		\Phi^*(S_1 \otimes S_2)|_p(u_1,...,u_r,v_1,...,v_r) &= S_1\otimes S_2|_{\Phi(p)}(d \Phi u_1,...,d\Phi v_r)  \\
+		&= S_1|_{\Phi(p)}(d \Phi u_1,...,d \Phi u_r) S_2|_{\Phi(p)}(d \Phi v_1,...,v_s)
+	\end{align*}
+
+	where we evaluate the tensor $S_1\otimes S_2$ using the isomorphism constructed in problem 1. %??Can I evalutate tensor this way?
+
+	Similarly:
+
+	\begin{align*}
+		\Phi^* S_1 \otimes \Phi^*  S_2|_p(u_1,...,u_r,v_1,...,v_s) &= \Phi^* S_1|_{\Phi(p)} (u_1,...,u_r) \Phi^*S_2|_{\Phi(p)} (v_1,...,v_s) \\
+		& S_1|_p(d \Phi u_1,...,d \Phi u_r) S_2|_p(d \Phi v_1,...,d \Phi v_s)
+	\end{align*}
+
+	which demonstrates the equality pointwise.
+
+	Item $2.$ follows similarly%?Is this true?
+
+	Lastly we show $3.$ Note it suffices to show the result for basis vectors $dx_{i_1} \wedge ... \wedge dx_{i_k}$ since the pullback and derivative will distribute over sums. First we examine 0-forms at a point p:
+
+	\begin{align*}
+		&\Phi^*(d f)[v] = df [d \Phi v] = d \Phi v [f] = v[f \circ \Phi]\\
+		&d \Phi^*(f)[v] = v [\Phi^* f] = v[f \circ \Phi]
+	\end{align*}
+
+	Now we consider arbitrary basis k-form:
+
+	\begin{align*}
+		\Phi^*(d (f dx_{i_1} \wedge ... \wedge dx_{i_k})) &= \Phi^*(df \wedge dx_{i_1} ... \wedge dx_{i_k}) = \Phi^*(df) \wedge \Phi^*(dx_{i_1}) \wedge .. \wedge \Phi^*(dx_{i_k})\\
+		 &= d\Phi^*(f) \wedge d\Phi^*(x_{i_1}) \wedge .. \wedge d\Phi^*(x_{i_k}) = d (\Phi^*(f)  d\Phi^*(x_{i_1}) \wedge .. \wedge d\Phi^*(x_{i_k}))\\
+		 & = d \Phi^*(f dx_{i_1} \wedge ... \wedge dx_{i_k})
+	\end{align*}
+
+	which finishes the proof
+
+\end{proof}
+
+
+
+
+
+\question{Question 5}
+
+\begin{prop}
+	Let $\omega$ a 1-form on $S^2$. Suppose for any $\phi \in SO(3)$, $\phi^* \omega = \omega$. Then $\omega = 0$.
+\end{prop}
+
+\begin{proof}
+	Fix point $p \in S^2$ and compute for arbitrary vector $v$ at p:
+	\begin{align*}
+		\omega|_p[v] = \phi^* \omega|_p[v] = \omega|_{\phi(p)} [d \phi v] = \omega|_{\phi(p)} [\phi v] = 0
+	\end{align*}
+	for the correct choice of rotation $\phi$. No vector is rotation invariant under every rotation, and the differential of the rotation is rotation, so this should always be possible.
+\end{proof}
+
+\question{Question 6}
+
+\begin{prop}
+	Given an vector field X, we have
+	\begin{enumerate}
+		\item If $\alpha$ and $\beta$ are forms then $L_X(\alpha \wedge \beta) = L_X\alpha \wedge \beta + \alpha \wedge L_X \beta$
+		\item If $\omega$ is a form then $L_X(d \omega) = d L_X(\omega)$
+		\item If $Y$ is a vector field and $\omega$ a form then $L_X(i_Y \omega) - i_Y(L_X \omega) = i_{[X,Y]}\omega$
+	\end{enumerate}
+\end{prop}
+
+\begin{proof}
+	First we show $1.$ Let $\alpha, \beta$ be forms and compute
+
+	\begin{align*}
+		L_X(\alpha \wedge \beta)|_p &= \frac{d}{dt}|_{t=0}\Phi^*_t (\alpha \wedge \beta)|_p = \lim_{t \to 0} \frac{\Phi^*_t(\alpha \wedge \beta)|_p - \alpha \wedge \beta|_p}{t} = \lim_{t \to 0} \frac{\Phi^*_t(\alpha)|_p \wedge \Phi^*_t(\beta)|_p - \alpha \wedge \beta|_p}{t} \\
+		&= \lim_{t \to 0} \frac{\Phi^*_t(\alpha)|_p \wedge \Phi^*_t(\beta)|_p - \Phi^*_t(\alpha)|_p \wedge \beta |_p}{t} + \lim_{t \to 0}\frac{\Phi^*_t(\alpha)|_p \wedge \beta |_p - \alpha \wedge \beta |_p}{t} \\
+		&= \lim_{t \to 0} \Phi^*_t(\alpha)|_p \wedge \frac{\Phi^*_t(\beta)|_p - \beta|_p}{t} + \lim_{t\to 0}\frac{\Phi^*_t(\alpha)|_p-\alpha |_p}{t}\wedge \beta|_p = \alpha|_p \wedge L_X \beta |_p + L_X \alpha |_p \wedge \beta|_p
+	\end{align*}
+
+	which establishes the desired equality pointwise.
+
+	Now we show $2.$ First consider a 0-form $f$. Then
+	\begin{align*}
+		L_X(df)(Y) =  \frac{d}{dt}|_{t=0}\Phi^*_t(df) = \frac{d}{dt}|_{t=0}d \Phi^*_t(f) = d \frac{d}{dt}|_{t=0}\Phi^*_t(f) = dL_x f
+	\end{align*}
+
+	where we justify the third equality pointwise.%?Need to justify this better. Can break down by definition further?
+
+	Note the result for 0-forms is sufficient to show Cartan's theorem. Then we may use Cartan to conclude for arbitrary $\omega$:
+	\begin{align*}
+		d((d\circ i_X + i_X \circ d)(\omega)) = d(d\circ i_X \omega + i_X \circ d \omega) = d i_X \circ d \omega = (d \circ i_X + i_X \circ d)(d \omega) = L_X (d\omega)
+	\end{align*}
+
+	Finally $3.$ First we show the result is true for 1-forms $gdf$(it is trivially true for 0-forms). We have
+	\begin{align*}
+		&i_{[X,Y]}gdf = df([X,Y]) = [X,Y](f) \\
+		&= L_X(i_Y df) = L_X(df(Y)) = X[df(Y)] = X[Y[f]]\\
+		&= i_Y(L_X df) = i_Y(dL_X f) = i_Y(X[f]) = Y[X[f]]
+	\end{align*}
+
+	so we may conclue $i_{[X,Y]} = L_X(i_Y df) - i_Y(L_X df)$ since $[X,Y] = XY - YX$. This extends to abitrary 1-forms $g df$ since
+	\begin{align*}
+		&i_{[X,Y]}g df = i_{[X,Y]} g \wedge df + g \wedge i_{[X,Y]} df = g i_{[X,Y]}df \\
+		&L_X(i_Y gdf) = L_X(f i_Y dg) = (L_X f)i_Y dg + f L_Xi_Y dg\\
+		& i_Y(L_X f dg) = L_X f i_Y dg + f i_Y L_X dg
+	\end{align*}
+	and the cross terms cancel.
+
+	We can extend this to arbitrary k-forms via induction. Note via linearity of the lie derivative and interior derivative over sums it suffices to consider a form which can be written $f \alpha \wedge \beta$. We seek to show $L_X(i_Y f \alpha \wedge \beta) - i_Y(L_X f \alpha \wedge \beta) = i_{[X,Y]} f \alpha \wedge \beta$. Compute:
+	\begin{align*}
+		&L_X(i_Y(\alpha \wedge \beta)) = L_X(\alpha \wedge i_Y \beta + (-1)^k i_Y \alpha \wedge \beta) = L_X \alpha + i_Y \beta + \alpha \wedge L_X i_Y \beta + (-1)^kL_Xi_Y \alpha \wedge \beta + (-1)^k i_Y \alpha \wedge \beta \\
+		& i_Y(L_X \alpha \wedge \beta) = L_X\alpha \wedge i_Y \beta + (-1)^k i_Y L_X \alpha \wedge \beta + \alpha \wedge i_Y L_x \beta + (-1)^k i_y \alpha \wedge L_X \beta 
+	\end{align*}
+
+	Then the difference is
+	\begin{align*}
+		&\alpha \wedge L_X i_Y \beta - \alpha \wedge i_Y L_X \beta + (-1)^{k+1}[L_X i_Y \alpha \wedge \beta - i_Y L_X \alpha \wedge \beta]  \\
+		& =\alpha \wedge (L_X i_Y \beta - i_Y L_X \beta) + (-1)^{k+1} (L_X i_Y \alpha - i_Y L_X \alpha) \wedge \beta)\\
+		& = \alpha \wedge i_{[X,Y]} \beta + (-1)^{k-1} (i_{[X,Y]}\alpha \wedge \beta) \\
+		&= i_{[X,Y]} \alpha \wedge \beta
+	\end{align*}
+
+	Then since every higher order form can be written as this wedge, we are done.
+
+	
+	%?Need to finish this?
+
+\end{proof}
+
+\question{Question 7}
+
+\begin{prop}
+	Suppose $\m$ a compact manifold and $(U,\phi)$ coordinate chart s.t. U bounded. If $\omega$ is a 1-form supported in $\phi(U)$ with $d \omega = 0$ then $\omega = df$ for some f.
+\end{prop}
+
+\begin{proof}
+	Using Cartan's formula we see for arbitrary vector field $X$
+	\[
+		L_X \omega = (d \circ i_X + i_X \circ d) \omega = d \circ i_X (\omega) = d(\omega[X])
+	\]	
+
+	So if we can produce vector field $X$ s.t. $L_X \omega = \omega$ we would have the desired result.
+
+	We could also try integrating over interior areas A with smooth boundary $\gamma$ in $U$(since $\omega$ subordianted by U in compact $\m$) to see via stokes to see
+	\[
+		0 = \int_A d\omega = \int_{\partial A} \omega = \int_{\gamma} \omega
+	\]
+
+	which suggests $\omega$ conservative and therefore can be written as $df$ for some f.
+\end{proof}
+
+\end{document}
+
