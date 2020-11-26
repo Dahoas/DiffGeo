@@ -38,6 +38,8 @@
 \newcommand{\myhwnum}{Hw 2}
 
 \newtheorem{prop}{Prop}
+\newtheorem{defn}{Definition}
+\newtheorem{rem}{Remark}
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{5pt plus 1pt}
@@ -65,14 +67,6 @@
 
 \end{center}
 
-\section{Contexts}
-
-Geodesicts can be thought of as having constant vector fields?
-	Vector field vector does not change along curve.
-	Directino does not change. Speed does not change.
-
-To show $g : M^d \to N^d$ local diffeomorphism at p, STS $dg_p$ is full rank.
-
 \section{Confusions}
 
 For curve $\gamma$, $\frac{d\gamma}{dt}$ is a Vector Field. Gives the vector corresponding to "direction of curve". At a point p
@@ -81,21 +75,31 @@ For curve $\gamma$, $\frac{d\gamma}{dt}$ is a Vector Field. Gives the vector cor
 	\frac{d\gamma}{dt}|_p[f] = \frac{d}{dt}(f \circ \gamma) |_{t = 0}
 \end{align*}
 
-For $f : M \to \R$ we have $\frac{d f}{dt}$ is a fucntion from $M \to \R$ where we evaluate:
+Why can $T_pM$ be thought of as a copy of $\R^n$?
 
+Meridians and parallels on surface S like longitudes(lines with constant width) and latitudes(geodesics with constant height) on sphere.
+
+Geodesic sphere: Seems to be points of distance r away from point p determined by radiating geodesics of length r from p. Denotes $S_r(p)$. 
+
+?How does differential of compositions work?
+I think trivially: $df(dg) = d f\circ g$ since
 \begin{align*}
-	\frac{df}{dt}|_p = X|_p[f]
+	d f\circ g[v] = v[f\circ g] = dg v[f] = df dg v
+\end{align*}
+Note here I'm not applying all the way: should really be applying resulting vector to functions $M \to \R$. 
+
+?What is the relationship between differential and Affine Connection/Covariant Derivative?
+
+Defining 3 tensors like $R'$ via 
+\begin{align*}
+	g(R'(X,Y,W),Z) = \langle X,W\rangle\langle Y , Z \rangle - \langle Y,W\rangle \langle X,Z \rangle
 \end{align*}
 
-where $X = \frac{d \gamma}{dt}$
+ie. an implicit definition. Much like how we can define directional derivatives.
 
-$\gamma(t,q,v)$ for geodesic $\gamma$ is transport of $v \in T_qM$ along $\gamma$ by time t? Note that $\gamma$ is unique geodesic determined by $v$ in given direction. Ie. $\gamma_v(0) = p$. Only locally defined(relying on ODE theory).
+A lot of the formulas for curvatures don't seem to be typechecking for me?
 
-*u,v seem to be standard coordinates for surface, s parameterization
-
-$\frac{ds}{du}$ is VF on s tangent to curves for fixed $v_0$. 
-
-\section{Proofs}
+\section{Content}
 
 \textbf{Claim:} For $X,Y \in \mathbb{X}(\m)$ for some manifold $\m$, we have
 \[
@@ -137,16 +141,57 @@ $\frac{ds}{du}$ is VF on s tangent to curves for fixed $v_0$.
 	Let $(\m,g)$ be a Riemanian manifold. Then $\exists$ a unique affine connection $\nabla$ which is compatible with $g$ and symmetric. Such connection is called Riemann connection.
 \end{prop}
 
-\begin{prop}
-	Symmetry lemma
-	\begin{align*}
-		\frac{D }{\del v} \frac{\del s}{\del u} = \frac{D}{\del u} \frac{\del s}{\del v}
-	\end{align*}
-\end{prop}
-
 \begin{proof}
-	
+	Suppose $\nabla$ compatible and symmetric connection. Then
+
+	\begin{align*}
+		&Xg(Y,Z) = g(\nabla_X Y, Z) + g(Y,\nabla_X Z)\\
+		&Yg(Z,X) = g(\nabla_Y Z,X) + g(Z,\nabla_Y X)\\
+		&-Zg(X,Y) = g(\nabla_Z X,Y) + g(X,\nabla_Z Y)
+	\end{align*}
+	which comes from compatibility, since X acting on function yields s.t. corollary to compatibility.(We may say this pointwise since at any ponit we have an integral curve $\gamma$ for X with $\gamma(0) = p$). 
+
+	Then substituting expression via symmetry of the expression $\nabla_X Z - \nabla_Z X = [X,Z]$ and the like and cancelling terms when adding the above three lines yields
+
+	\begin{align*}
+		g(\nabla_X Y,Z) = \frac{1}{2}(Xg(Y,Z) + Y g(Z,X) - Zg(X,Y) + g(X,[Y,Z]) + g(Y,[X,Z]) - g(Z,[X,Y]))
+	\end{align*}
+
+	so then we define $\nabla_X Y$ to be the vector s.t. the relation holds(note this is how inner product leads to definition of derivative)
 \end{proof}
+
+\section{Curvature}
+
+Recall Curvature $R : X(M) \times X(M) \to X(M)$ is defined as
+
+\begin{align*}
+	R(X,Y)Z := \nabla_Y\nabla_X Z - \nabla_X\nabla_Y Z + \nabla_{[X,Y]}Z \\
+	(X,Y,Z,W) := g(R(X,Y)Z,W)
+\end{align*}
+
+Curvature tensor example of covariant tensor. Differential forms example of contravariant tensor(measuring the dual?)
+
+\section{Jacobi Fields}
+
+Jacobi field is vector field along geodisic $\gamma$ which corresponds to a perturbation of $\gamma$ iin the space of geodesic.
+
+Also thought of as tangent vectors in space of geodesics.
+
+We study the following:
+
+\begin{align*}
+	(d exp_p)_{tv}(tw) = \frac{df}{ds}(t,0) 
+\end{align*}
+
+along $\gamma(t) = exp_p(tv)$
+
+\section{Killing Fields}
+
+\begin{rem}
+	Killing fields flows preserve orientation of vectors at points. Flow smoothly(diffeomorphism assumption).
+\end{rem}
+
+
 
 \end{document}
 

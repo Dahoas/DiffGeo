@@ -1,0 +1,389 @@
+\documentclass[11pt]{article}
+%you can look for fun LaTeX packages to use hereasdf
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{amsthm}
+
+\usepackage{graphicx}
+\usepackage{dcolumn}
+\usepackage{bm}
+
+%fun commands for fun sets
+%make sure to use these in math mode
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\m}{\mathcal{M}}
+\newcommand{\Tt}{\mathcal{T}}
+\newcommand{\pa}{\partial}
+\newcommand{\Dd}{\mathcal{D}}
+\newcommand{\del}{\partial}
+
+
+
+\oddsidemargin0cm
+\topmargin-2cm    
+\textwidth16.5cm   
+\textheight23.5cm  
+
+\newcommand{\question}[2] {\vspace{.25in} \hrule\vspace{0.5em}
+\noindent{\bf #1: #2} \vspace{0.5em}
+\hrule \vspace{.10in}}
+\renewcommand{\part}[1] {\vspace{.10in} {\bf (#1)}}
+
+\newcommand{\myname}{Alex Havrilla}
+\newcommand{\myandrew}{alumhavr}
+\newcommand{\myhwnum}{Hw 6}
+
+\newtheorem{prop}{Prop}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+ 
+\pagestyle{fancyplain}
+\lhead{\fancyplain{}{\textbf{HW\myhwnum}}}      % Note the different brackets!
+\rhead{\fancyplain{}{\myname\\ \myandrew}}
+\chead{\fancyplain{}{\mycourse}}
+
+\linespread{1.3}
+
+\begin{document}
+
+\medskip                        
+
+\thispagestyle{plain}
+\begin{center}
+
+{\myname}
+
+\myandrew
+
+\myhwnum
+
+\end{center}
+
+\question{Question 1}
+
+\textbf{Geodesics of a Surface of Revolution}
+
+Let $\phi$ as described. First we compute the metric. Recall $g_{ij} = g(\frac{\del}{\del x_i},\frac{\del}{\del x_j}) = \frac{\del}{\del x_i} \cdot \frac{\del}{\del x_j}$. Compute
+
+\begin{align*}
+	\phi_u = (-f(v)sin(u),f(v)cos(u),0)\\
+	\phi_v = (f'(v)cos(u),f'(v)sin(u),g'(v))
+\end{align*}
+
+and then
+
+%Induced means inherited from R^n
+
+\begin{align*}
+g_{11} = \phi_u \cdot \phi_u =f(v)^2(sin^2+cos^2) = f^2)	
+\\
+g_{22} = \phi_v \cdot \phi_v = f'^2(cos^2+sin^2)+g'^2=f'^2 + g'^2\\
+g_{12} = \phi_u \cdot \phi_v = 0
+\end{align*}
+
+ie.
+
+\begin{center}
+	$G = \begin{bmatrix}
+		f^2 & 0 \\
+		0 & f'^2 + g'^2
+	\end{bmatrix}$
+\end{center}
+
+and thus
+
+\begin{center}
+	$G^{-1} = \begin{bmatrix}
+		1/f^2 & 0 \\
+		0 & 1/(f'^2 + g'^2)
+	\end{bmatrix}$
+\end{center}
+
+Now we compute the christoffel symbols. For arbitray symbol we know $\Gamma_{ij}^k = g^{kl}/2(\frac{\del g_{il}}{\del x_j} + \frac{\del g_{jl}}{\del x_i} - \frac{\del g_{ij}}{\del x_l})$ so
+
+\begin{align*}
+	&\Gamma_{11}^1 = g^{11}/2(\frac{\del g_{11}}{\del u} + \frac{\del g_{11}}{\del u} - \frac{\del g_{11}}{\del u}) = 0 \\ 
+	& \Gamma_{11}^2 = g^{22}/2(\frac{\del g_{12}}{\del u} + \frac{\del g_{12}}{\del u} - \frac{\del g_{11}}{\del v}) = \frac{-ff'}{f'^2+g'^2} \\
+	& \Gamma_{12}^1 = g^{11}/2(\frac{\del g_{11}}{\del v} + \frac{\del g_{21}}{\del u} - \frac{\del g_{12}}{\del u}) = \frac{f'}{f}\\
+	& \Gamma_{12}^2 = g^{22}/2(\frac{\del g_{12}}{\del v} + \frac{\del g_{22}}{\del u} - \frac{\del g_{12}}{\del v}) = 0 \\
+	& \Gamma_{22}^1 = g^{11}/2(\frac{\del g_{21}}{\del v} + \frac{\del g_{21}}{\del v} - \frac{\del g_{22}}{\del u}) = 0\\
+	& \Gamma_{22}^2 = g^{22}/2(\frac{\del g_{22}}{\del v} + \frac{\del g_{22}}{\del v} - \frac{\del g_{22}}{\del v}) = \frac{f'f''+g'g''}{f'^2+g'^2}
+\end{align*}
+
+Now we compute the geodesic equations as 
+
+\begin{align*}
+	0 = \frac{d^2x_k}{dt^2}+\sum_{i,j}\Gamma_{ij}^k \frac{dx_i}{dt}\frac{dx_j}{dt}
+\end{align*}
+
+so
+
+\begin{align*}
+	0 = \frac{d^2u}{dt^2} + 2\Gamma_{12}^1\frac{du}{dt}\frac{dv}{dt}+\Gamma_{11}^1(\frac{du}{dt})^2+\Gamma_{22}^1(\frac{dv}{dt})^2 = \frac{d^2v}{dt^2} + 2\frac{f'}{f}\frac{du}{dt}\frac{dv}{dt} 
+\end{align*}
+
+and
+
+\begin{align*}
+	 0 = \frac{d^2v}{dt^2} + 2\Gamma_{12}^2\frac{du}{dt}\frac{dv}{dt}+\Gamma_{11}^2(\frac{du}{dt})^2+\Gamma_{22}^2(\frac{dv}{dt})^2 = \frac{d^2v}{dt^2} -\frac{ff'}{f'^2+g'^2}(\frac{du}{dt})^2+\frac{f'f''+g'g''}{f'^2+g'^2}(\frac{dv}{dt})^2
+\end{align*}
+\begin{prop}
+	Geometrically energy $|\gamma'(t)|^2$ of a geodesic is constant. Further if $\beta(t)$ is oriented angle $< \pi$ of the geodesic $\gamma$ with parallel P intersecting at $\gamma(t)$ then $r cos(\beta)$ is constant where r is the radius of the parallel P. 
+\end{prop}
+
+%What's being done here is we parameterize u,v w.r.t t and this parameterizes a path on the manifold?
+%?I'm constantly being confused whether we do computations with the parameterization or the object?
+
+\begin{proof}
+	Note $\gamma(t) = (u(t),v(t))$. So $\gamma'(t) = (u'(t),v'(t))$ Compute:
+
+	\begin{align*}
+		\frac{d}{dt}|\gamma'(t)|^2 &= \frac{d}{dt}\langle \gamma'(t),\gamma'(t)\rangle = \frac{d}{dt}(g_{11}u'^2 + g_{22}v'^2) \\
+		&\frac{d}{dt}(f^2u'^2+v'^2(f'^2+g'^2)) = 2ff'v'u'^2+2f^2u'u''+ 2v'v''(f'^2+g'^2)+v'^2(2f'f''v'+2g'g''v')
+	\end{align*}
+
+	which we see equals 0 when multiplying the second geodesic equation by $v'(f'^2+g'^2)$. Hence this is constant.
+
+
+	Now we argue for the second geometric consideration. Compute $\beta(t)$ as $\langle \gamma'(t),p'(t)\rangle$ for parallel $p(t)$ via
+	\begin{align*}
+		\langle \gamma'(t),p'(t)\rangle = g_{11}u_{\gamma}'(t)u_p'(t) =  f^2u_{\gamma}'(t)u_p'(t)
+	\end{align*}
+
+	Further we can choose p to have constant speed yielding $f^2u_{\gamma}'$.
+
+	We also compute in $\R^3$ yielding $|p'||\gamma'|cos(\beta)$. But we know $f^2u_{\gamma}$ and $|\gamma'|$ constant hence $|p'|cos(\beta)$ equal to a constant as desired. Note we know the two terms constant via the first geodesic equation.
+
+
+\end{proof}
+
+\begin{prop}
+	A geodesic of the paraboloid which is not a meridian intersects itself an infinte number of times
+\end{prop}
+
+\begin{proof}
+	Clairaut's equation tells us for a geodesic $\gamma$ we know $r(t)cos(\beta(t))$ is constant for parallels p. 
+
+	It suffices to show $\gamma$ goes an infinite number of times around the z-axis and $r(t) \to \infty$. We consider polar coordinates. Set $\gamma(t) = (r(t),\theta(t))$. We show $\theta(t) \to \infty$ wlog. We know the geodesic cannot be tangent to a meridian and hence $\theta$ is monotone. It cannot be $\theta$ converges to a constant(otherwise would be tangent to meridian), so it diverges. 
+
+	We now show $r(t) \to \infty$. Via clairaut we know $r(t)cos(\beta(t))$ constant and if $r(t)$ does not go to $\infty$ then it is bounded. But we know $\beta(t)$ will approach $\pi/2$ as $\gamma$ approaches a meridian(asymptotically) so it must be $r(t) \to \infty$. Then it is clear $\gamma$ must intersect an infinite number of times.
+\end{proof}
+
+
+\question{Question 2}
+
+\textbf{Killing Fields}
+
+Let $X$ be as defined via $\phi : (-\epsilon,\epsilon) \times U \to M$. 
+
+\begin{prop}
+	Linear vector field $v : \R^n \to \R^n$ defined via $A \in \R^{n \times n}$ is killing $\iff$ $A$ antisymmetric
+\end{prop}
+
+\begin{proof}
+
+
+	Suppose $A$ anti-symmetric. So $A = -A^T$. %Equivalent to showing norm doesn't change. 
+	To show A killing we need to show the flow of $A$ for fixed $t$ is an isometry. Recall $\phi$ given via
+
+	\begin{align*}
+		\phi_t(x,t) = v(\phi(x,t)) = A\phi(x,t)
+	\end{align*}
+	%?But really why does it solve to this?
+	which solves to $\phi(x,t) = e^{At}x$
+
+	We show for fixed t
+	\begin{align*}
+		\langle d\phi x , d\phi y\rangle = \langle e^{At}x,e^{At}y\rangle = \langle x ,(e^{At})^Te^{At}\rangle = \langle x,y\rangle
+	\end{align*}
+
+	with $(e^{At})^T = e^{A^Tt} = e^{-At}$. Further clearly $\phi$ is a (smooth) diffeomorphism so this establishes v a killing field.
+
+	$\\$
+
+	Now suppose $v$ killing. Then the flow $\phi(x,t) = e^{At}x$ is an isometry. In particular we know for $t > 0$, and for all $x \in \R^n$
+
+	\begin{align*}
+		\langle x,x \rangle = \langle e^{At}x,e^{At}x\rangle = \langle x, e^{A^Tt}e^{At}x\rangle
+	\end{align*}
+
+	so it must be $e^{A^Tt}e^{At}= I$ and so $A^T = -A$ as desired.
+	%To rigorously justify this think riesz rep(probably overkill)
+
+	%!Key to this problem is algebraic relationship between expential and negation: inverse of exponential is negation of exponent
+
+\end{proof}
+
+\begin{prop}
+	Suppose X killing field on $M$. U a normal neighborhood of $p \in M$ s.t. $X(p) = 0$ uniquely in U. Then in U, X is tangent to the geodesic spheres centered at p.
+\end{prop}
+
+%Killing fields parallel to geodesic spheres at center points
+
+\begin{proof}
+	We seek to show $\langle X, V\rangle$ for all geodesic V centered at p. 
+
+	Let $q$ be a point in the geodesic sphere of radius $a > 0$with $exp_p v = q$ for some $v \in T_pM$. $\gamma$ is the geodesic $t \to exp_p(tv)$. We know $q \to \phi(q,s)$ is an isometry for fixed s, the image of $\gamma$ under $\phi$ is a geodesic, since the curve stays autoparallel. %!Using isometric images of geodesics are geodesics 
+	Denote this images as $\gamma_s(t)$. Since $\gamma_s(0) = \phi(p,s) = 0$ since $X(p) = 0$ and the curves have same speed we know $\gamma_s(t) = exp_p(tv(s))$ for $v(s) \in T_pM$. So $\gamma_s(1) $ is on the geodesic sphere for arbitrary s. We have $\gamma_s(1) = \phi(q,s)$ and $X(q) = \frac{d}{ds}|_{s=0}\phi(q,s)$ so $X(q)$ tangent to the geodesic sphere. 
+\end{proof}
+
+\begin{prop}
+	Let X a differentiable vector field on M and $f : M \to N$ an isometry. Y VF on N via $Y(f(p)) = df_p (X(p))$ for $p \in M$. Then $Y$ killing field $\iff$ X killing field. 
+\end{prop}
+
+\begin{proof}
+	Via invertability both directions are the same so it suffices to consider the forward direction. Suppose Y is a killing field. Let $V \subseteq N$ open subset. Then want to show for flow $\phi(t,p)$ of X an isometry. 
+
+	Consider flow on $N$ via $\psi_t(q) = f(\phi(t,f^{-1}(q)))$ as a flow for Y. We know $f(\phi(t,\cdot)) = \psi_t(f(\cdot))$ and $\psi$ an isometry. Note clearly $\psi$ is a diffeomorphism(composition of diffeomorphisms). Compute for $v,w \in T_p M$,
+	\begin{align*}
+		\langle d\phi_t v,d\phi_t w\rangle_M = \langle df d\phi_t v,df d\phi_t w\rangle_N = \langle d \psi_t \circ f v,d \psi_t \circ f w\rangle_N = \langle d f v,d  f w\rangle_N = \langle v,w\rangle_M
+	\end{align*} 
+
+	showing $\phi$ an isometry
+	%?How does differential of composition work?
+\end{proof}
+
+\begin{prop}
+	X is killing $\iff$ $\langle \nabla_Y X,Z\rangle + \langle \nabla_Z X,Y \rangle = 0$  for $Y,Z \in X(M)$
+\end{prop}
+
+\begin{proof}
+	For the forwards direction by continuity it suffices to prove for $X(q) \neq 0$. We pick a submanifold orthogonal to $X(q)$ of dimension n-1 and pick coordinates $X_i = \frac{d}{dx_i}$ for the tangent bundle. Then for U neighborhood of q and V n-1 dim neighborhood, for small enough $\epsilon$ we know $V \times (-\epsilon,\epsilon) \subseteq U$ (in coordinates).
+
+	Compute
+
+	%Where do these formulas come from?
+	\begin{align*}
+		\langle \nabla_{X_j} X,X_i\rangle + \langle \nabla_{X_i} X,X_j\rangle = X\langle X_i,X_j\rangle - \langle [X,X_i],X_j\rangle - \langle [X,X_j],X_i\rangle = \frac{\del}{\del t}\langle X_i,X_j\rangle = 0
+	\end{align*}
+
+	where we get the last equality because X is a killing field.%I have no clue how this was done?
+
+	For the backwards direction assume $\langle \nabla_Y X,Z\rangle + \langle \nabla_Z X,Y \rangle = 0$  for $Y,Z \in X(M)$. Let $\phi_t(x)$ be the flow at time t. Compute at point p:
+
+	%?what justifies product rule like this?
+	\begin{align*}
+		\frac{d}{dt}\langle d\phi_t Y, d \phi_t Z\rangle = \langle \nabla_Y X,d \phi_t Z\rangle  + \langle d\phi_t Y,\nabla_Z X \rangle = 0
+	\end{align*}
+
+	so in particular $\langle d\phi_t Y, d \phi_t Z\rangle = \langle Y,Z\rangle$ where we check the value at $t=0$. 
+\end{proof}
+
+\begin{prop}
+	Let X a nonzero killing field. Then $\exists$ a system of coordinates $(x_1,...,x_n)$ in neighborhood of q s.t. $g_{ij}$ of the metric does not depend on $x_n$. 
+\end{prop}
+
+\begin{proof}
+	Recall because $X$ is nonzero we can find a coordinate s.t. locally x is $\frac{\partial}{\partial x_n}$. But then it must be the metric independent of $x_n$ vai the killing equation since when we differentiate an expression of the metric with respect to $x_n$ we get 0.
+\end{proof}
+
+
+
+\question{Question 3}
+
+\textbf{More on Killing Fields}
+
+\begin{prop}
+	Let $A_X : X(M) \to X(M)$ be as defined. Then $\langle A_X(Z),X)\rangle(p) = 0$ where $p$ is a critical point of $f(q) = \langle X,X\rangle_q$ for arbitrary $Z$
+\end{prop}
+
+\begin{proof}
+	This constructs what we want.
+
+	Compute:
+	\begin{align*}
+		\langle A_X(Z),X\rangle(p) = \langle \nabla_Z X,X \rangle (p)
+	\end{align*}
+
+	Recall the Killing equation:
+	\begin{align*}
+		\langle \nabla_Y X,Z\rangle + \langle Y,\nabla_Z X\rangle = 0
+	\end{align*}
+
+	Note then $\langle A_X(Z),X\rangle + \langle Z,A_X(X)\rangle = 0$. And then $\langle Z,A_X(X)\rangle = 0$ since p is a critical point and $\nabla_X X|_p = 0$.%?Why is this true?
+
+\end{proof}
+
+\begin{prop}
+	$\langle A_X(Z),A_X(Z) \rangle(p) = \frac{1}{2}Z_p(Z\langle X,X\rangle) + \langle R(X,Z)X,Z\rangle $
+\end{prop}
+
+\begin{proof}
+	We finish using results from Question 2. Let $S = 1/2 ZZ\langle X,X\rangle - \langle R(X,Z)X,Z\rangle$. The killing equation from above tells us $\langle \nabla_Z X,X\rangle + \langle \nabla_X X,Z\rangle = 0$ 
+
+	Then 
+	\begin{align*}
+		\langle \nabla_{[X,Z]}X,Z\rangle -\langle \nabla_X X,\nabla_Z Z\rangle - \langle \nabla_X \nabla_Z,Z\rangle
+	\end{align*}
+
+	We conclude
+	\begin{align*}
+		-\langle \nabla_Z X,\nabla_X Z\rangle + \rangle \nabla_Z X,\nabla_Z X\rangle + \langle \nabla_Z X, \nabla_X Z\rangle - \langle \nabla_X X,\nabla_Z Z\rangle = \langle \nabla_Z X,\nabla_Z X\rangle
+	\end{align*}
+
+	since $[X,Y] = \nabla_X Y - \nabla_Y X$ and $\nabla_X X|_p = 0$
+\end{proof}
+
+\question{Question 4}
+
+\textbf{More on Killing Fields}
+
+\begin{prop}
+	Let M be a compact Riemannian manifold of even dimension with positive sectional curvature. Then every kiling field X on M has a singularity. 
+\end{prop}
+
+\begin{proof}
+	Set $f :M \to R$ via $f(q) = \langle X,X\rangle(q)$ and $p \in M$ a minimum. Suppose $X(p) \neq 0$. We set $A : T_p M \to T_p M $ via $A(y) = A_X Y = \nabla_Y X$ where $Y$ extends $y \in T_p M$. 
+
+	Set $E \subseteq T_p M$ orthogonal to $X(p)$. We claim $A : E \to E$ is an antisymmetric isomorphism. Then it must be $dim E = dim M - 1$ is even given the antisymmetry, a contradiction since the manifold is even degree. $X(p) = 0$. 
+
+	We now argue $A$ antisymmetric isomorphism. First we argue the isomorphism. Suffices to show bijectivity since the mapping clearly linear. Notice via the above problem equation i, $A(Z)$ stays orthogonal to X. Note if $A_X Y = \nabla_Y X = 0$ then it must be $Y = 0$ by part 2 of the above since otherwise it must have positive norm given by equation ii, which shows injectivity since the mapping linear. Surjectivity then follows since the codomain is the domain. Antisymmetry comes from the first equation i) in above by transposing.
+	%?How does this actually work?
+\end{proof}
+
+\question{Question 5}
+
+\textbf{Schur's Theorem}
+
+\begin{prop}
+	Let $M^n$ a connected Riemannian manifold with $n \geq 3$. Suppose M is isotropic, that is, for each $p \in M$, sectional curvature does not depend on $\sigma \subseteq T_p M$. Then M has constant sectional curvature.
+\end{prop}
+
+\begin{proof}
+	We define the 4-tensor 
+	\begin{align*}
+		R'(W,Z,X,Y) = \langle W,X\rangle \langle Z,Y\rangle - \langle Z,X\rangle \langle W,Y \rangle 
+	\end{align*}
+
+	Because sectional curvature $K$ is constant w.r.t $\sigma \substeq T_pM$ we know $R = KR'$ from our lemma. So for $U \in X(M),$ $\nabla_U R = (UK)R'$ via application.
+	%?why is this actually true?
+
+	The second Bianchi identity tells us 
+	\begin{align*}
+		\nabla R(W,Z,X,Y,U) + \nabla R(W,Z,Y,U,X) + \nablaR (W,Z,U,X,Y) = 0
+	\end{align*}
+
+	%I think the book must define R differently
+
+
+
+	Choose Y and Z s.t. at p $\langle X,Y\rangle = \langle Y,Z\rangle = \langle Z,X\rangle = 0$ with $\langle Z,Z\rangle = 1$. Then setting $U = Z$ we have
+
+	\begin{align*}
+		\langle (XK)Y - (YK)X,W\rangle=0
+	\end{align*}
+
+	for arbitrary W via the second bianchi identity and $\nabla_U R = (UK)R'$. Then since $X,Y$ linearly independent at p conclude $XK = 0$ for all $X \in T_p M$.  Hence K must be constant.
+
+\end{proof}
+
+
+
+\end{document}
+
