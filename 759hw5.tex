@@ -79,7 +79,24 @@ Where $\nabla$ is the Riemann connection then
 \end{prop}
 
 \begin{proof}
+	Set $p_t = \gamma(t)$ and $p_0 = \gamma(t_0)$. Then at $T_{p_0}\m$ pick an orthonormal basis $v_1,...,v_n$. We extend these to vector fields $V_1$,...,$V_n$ along $\gamma$ using parallel transport. Notice via compatibility of with the metric these stay orthogonal. We can then write $Y = a^iV_i$ and thus compute
+	\begin{align*}
+		\nabla_X Y|_{\gamma(t_0)} = \nabla_X a^iV_i|_{p_0} = X[a^i]V_i|_{p_0} + a^i \nabla_X V_i |_{p_0}= X[a^i]v_i
+	\end{align*}
+
+	where the second term $a^i \nabla_X V_i = 0$ since the $V_i$ are parallel along $\gamma$.
+
+	%Point is to take control of the parallel transport 
+
+	Then in the other direction we compute
 	
+	\begin{align*}
+		\frac{d}{dt}(P^{-1}_{\gamma,t_0,t}Y|_{p_t})|_{t=t_0} &= \frac{d}{dt}(P^{-1}_{\gamma,t_0,t}a^iV_i|_{p_t})|_{t=t_0} = \frac{d}{dt}(a^i|_{p_t}P^{-1}_{\gamma,t_0,t}V_i|_{p_t})|_{t=t_0} \\
+		& \frac{d}{dt}(a^i|_{p_t}v_i)|_{t=t_0} =  X[a^i]v_i
+	\end{align*}
+
+	where we note parallel transport is linear and thus the inverse is linear. Further $\frac{d}{dt}(a_i v_i) = X[a^i]v_i$ since $X = \frac{d \gamma}{dt}$
+	%?why is this?
 \end{proof}
 
 \question{Question 2}
@@ -91,9 +108,43 @@ Let $\m$, $\overline{\m}$ be as defined with $ : M \to \overline{\m}$ an immersi
 \end{prop}
 
 \begin{proof}
-	To show $\nabla$ is the Riemannian connection on $\m$ it suffices to show it is a connection, symmetric, and compatible with $g$. Then via uniqueness e are done.
+	To show $\nabla$ is the Riemannian connection on $\m$ it suffices to show it is a connection, symmetric, and compatible with $g$. Then via uniqueness we are done.
 
-	First we show it's a connection.
+	First we show it's a connection. Note both $(df)^{-1}$ and $\Pi_T$ are(locally) linear. Compute
+
+	%?Might have to be careful about how I extend?
+
+	\begin{align*}
+		\nabla_{X + Y} Z &= (df)^{-1}\Pi_T(\overline{\nabla}_{\overline{X} + \overline{Y}}df(Z)) = (df)^{-1}\Pi_T(\overline{\nabla}_{\overline{X}} df(Z) + \overline{\nabla}_{\overline{Y}}df(Z)) =\\ &=(df)^{-1}\Pi_T \overline{\nabla}_{\overline{X}} df(Z) + (df)^{-1}\Pi_T \overline{\nabla}_{\overline{Y}} df(Z) = \nabla_X Z + \nabla_Y Z
+	\end{align*}
+
+	$\nabla_X(Y_1 + Y_2) = \nabla_X Y_1 + \nabla_X Y_2$ follows similarly. 
+
+	\begin{align*}
+		\nabla_X (hY) &= (df)^{-1}\Pi_T(\overline{\nabla}_{df(X)}hdf(Y)) = (df)^{-1}\Pi_T(df(X)[h]df(Y) + h\overline{\nabla}_{df(X)}df(Y))\\
+		&= X[h]Y + h \nabla_X Y
+	\end{align*}
+
+	Next we show symmetry:
+
+	\begin{align*}
+		\nabla_X Y - \nabla_Y X &= (df)^{-1}\Pi_T(\overline{\nabla}_{df(X)}df(Y)) - (df)^{-1}\Pi_T(\overline{\nabla}_{df(Y)}df(X)) \\
+		&= (df)^{-1}\Pi_T(\overline{\nabla}_{df(X)}df(Y) - (\overline{\nabla}_{df(Y)}df(X))) = df^{-1}\Pi_T([df(X),df(Y)]) = [X,Y]
+	\end{align*}
+
+	%Do I need to be more careful here?
+
+	And finally that it is compatible:
+
+	Recall that the metric is compatible with $\nabla$ if $X[g(Y,Z)] = g(\nabla_X Y,Z) + g(Y,\nabla_X Z)$. We show
+
+	\begin{align*}
+		X(Y,Z)_g &= (df)(X)((df)(Y),(df)(Z))_{\overline{g}} \\
+		&= \overline{\nabla}_{(df)(X)} ((df)(Y),(df)(Z))_{\overline{g}} = (\overline{\nabla}_{(df)(X)}(df)(Y),df(Z))_{\overline{g}} + (df(Y),\overline{\nabla}_{(df)(X)}(df)(Z))_{\overline{g}} \\
+		&= (\nabla_X Y, Z)_g + (Y,\nabla_X Z)_g
+	\end{align*}
+
+	Thus by uniqueness we have shown $\nabla_X Y$ is the affine connection $\m$.
 \end{proof}
 
 \question{Question 3}
@@ -107,11 +158,126 @@ with metric coefficients $g_{11}=g_{22} = \frac{1}{y^2}$ and $g_{12} = 0$.
 \end{prop}
 
 \begin{proof}
-	test
+	It suffices to compute the christoffel symbols.
+
+	First note we have for $y > 0$ ie. the half plance:
+	\[G^{-1} = 
+			\begin{bmatrix}
+				y^2 & 0\\
+				0 & y^2\\
+			\end{bmatrix}
+	\]
+
+	Recall we know for arbitrary symbol
+	\begin{align*}
+		\Gamma_{ij}^k g^{kl}/2(\frac{\partial g_{il}}{\partial x_j} + \frac{\partial g_{jl}}{\partial x_i} - \frac{\partial g_{ij}}{\partial x_l})
+	\end{align*}
+
+	Compute
+
+	\begin{align*}
+		\Gamma_{11}^1 = \frac{g^{11}}{2}(\frac{\partial g_{11}}{\partial x} + \frac{\partial g_{11}}{\partial x} - \frac{\partial g_{11}}{\partial x}) + \frac{g^{12}}{2}(\frac{\partial g_{12}}{\partial x} + \frac{\partial g_{12}}{\partial x} - \frac{\partial g_{11}}{\partial x}) = 0
+	\end{align*}
+
+	since $\frac{\partial \cdot}{\partial x} = 0 $ and $g^{12} = 0$. 
+
+	A similar computation holds for $\Gamma_{12}^2, \Gamma_{22}^1$
+	%?Should I work this out?
+
+	Now compute
+
+	\begin{align*}
+		\Gamma_{12}^1 = \frac{g^{11}}{2}(\frac{\partial g_{11}}{\partial y} + \frac{\partial g_{2}}{\partial x} - \frac{\partial g_{12}}{\partial x}) + \frac{g^{12}}{2}(\frac{\partial g_{12}}{\partial y} + \frac{\partial g_{22}}{\partial x} - \frac{\partial g_{12}}{\partial y}) = \frac{y^2}{2}(-\frac{2}{y^3}) = -\frac{1}{y}
+	\end{align*}
+
+	Computation follows similarly for $\Gamma_{22}^2$ and $\Gamma_{11}^2$. 
+	%?Should I work this out fully?
+	
+\end{proof}
+
+Let $V_0 = (0,1)^T$ tangent vector at $(0,1) \in \R_+^2$. Let $V(t)$ be the parallel transport of $V_0$ along curve $x = t,y=1$. 
+
+\begin{prop}
+	V(t) makes angle t with direction of y-axis(measured clockwise)
+\end{prop}
+
+\begin{proof}
+	Set $v(t) = (a(t),b(t))$
+
+	We know
+	\begin{align*}
+		\frac{\partial a}{\partial t} + \Gamma_{12}^1 b = 0 \\
+		\frac{\del b}{\del t} + \Gamma_{11}^2a = 0
+	\end{align*}
+
+	We have $a = cos \theta(t), b = sin \theta(t)$ and long the curve we have $y = 1$, we obtain from the equations above that $\frac{d \theta}{dt} = -1$. With $v(0) = v_0$ then $\theta(t) = \pi/2 - t$. 
 \end{proof}
 
 \question{Question 4}
 
+Let $L : T_p(\m) \to T_p(\m)$ via $L(Y) = \nabla_Y X|_p$ which is linear. Then write $DIV(X) = trace(L)$ since $L$ is a linear operator on finite dimensional vector spaces.
+
+\begin{prop}
+	$DIV(X) = div(X) = \frac{d i_X (\omega_g)}{\omega_g}$
+\end{prop}
+
+\begin{proof}
+
+	$DIV(X)$ is defined as the trace of L where $L$ takes $Y \to \nabla_Y X$. 
+
+	We follow do Carmo's plan. 
+
+	%?Do we have to show we can find a geodesic frame at every point?
+
+	First we establish we can write at a point $p \in \m$
+	\begin{align*}
+		DIV X = \sum_i E_i(f_i)(p)
+	\end{align*}
+
+	where $X = f^i E_i$ with $\{E_i\}$ an orthonormal basis s.t. at $p$.
+
+	Note for each $E_i$, $a_i^j E = \nabla_{E_i} X = \nabla_{E_i} f^i E_i = E^i[f] E_i  $
+	\begin{align*}
+		trace(L) = \sum_i a_i^i
+	\end{align*}
+
+	But note exactly $E_i(f_i)(p) = a_i^i$. 
+
+	Now pick 1-forms $\omega_i$ s.t. $\omega = \omega_i(E_j) = \delta_{i,j}$. Since $\m$ is oriented this is a volume form via an argument similar to the direction orientability $\implies$ existance of volume form. In particular we know $dx_1 \wedge ... \wedge dx_n$ can be well defined globally as a volume form, which is equivalent to $f\omega_1 \wedge ... \wedge \omega_n$ for some $f$ which we can take to be positive by negating appropriate $E_i$ and $\omega_i$. 
+	%?Should I be more careful here?
+
+	Set $\theta_i = \omega_1 \wedge ... \wedge \hat{\omega_i} \wedge ... \wedge \omega_n$. We compute
+
+	\begin{align*}
+		i_X(\omega)(v_2,...,v_n) &= \omega(X,v_2,...,v_n) = \omega(f^iE_i,v_2,...,v_n) = \sum_i \omega(f_iE_i,v_2,...,v_n) \\
+		&=\sum_i \omega(f_iE_i,v_2,...,v_n) = \sum_i (-1)^{i-1}\omega_i(f_iE_i) \theta_i(v_2,...,v_n)
+	\end{align*}
+
+	since if we have $\omega_j(f_iE_i)$ for some $j \neq i$ then we have 0 in a neighborhood. Note $\omega_i(f_i E_i) = f_i$ at a point. So
+
+	\begin{align*}
+		\sum_i (-1)^{i-1}\omega_i(f_iE_i) \theta_i(v_2,...,v_n) = \sum_i (-1)^{i+1}f_i \theta_i(v_2,...,v_n)
+	\end{align*}
+
+	which gives $i_X(\omega) = \sum_i (-1)^{i+1} f_i \theta_i$
+
+	Then write
+	\begin{align*}
+		d(i(X)\omega) = \sum_i (-1)^{i+1} df_i \wedge \theta_i + \sum_i (-1)^{i+1} f_i \wedge d\theta_i = \sum_i E_i(f_i) \omega + \sum_i (-1)^{i+1}f_i \wedge d\theta_i
+	\end{align*}
+\end{proof}
+
+Note $d \theta_i = 0$ since
+
+\begin{align*}
+	d\omega_k (E_i,E_j) = E_i \omega_k(E_j) - E_j \omega(E_i) - \omega_k([E_i,E_j]) = \omega_k (\nabla_{E_i} E_j - \nabla_{E_j} E_i)
+\end{align*}
+
+So really 
+
+\begin{align*}
+	d(i(X)\omega)(p) = \sum_i E_i(f_i)(p) \omega = div X(p) \omega
+\end{align*}
 
 
 \end{document}

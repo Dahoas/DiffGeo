@@ -65,6 +65,14 @@
 
 \end{center}
 
+\section{Contexts}
+
+Geodesicts can be thought of as having constant vector fields?
+	Vector field vector does not change along curve.
+	Directino does not change. Speed does not change.
+
+To show $g : M^d \to N^d$ local diffeomorphism at p, STS $dg_p$ is full rank.
+
 \section{Confusions}
 
 For curve $\gamma$, $\frac{d\gamma}{dt}$ is a Vector Field. Gives the vector corresponding to "direction of curve". At a point p
@@ -72,6 +80,20 @@ For curve $\gamma$, $\frac{d\gamma}{dt}$ is a Vector Field. Gives the vector cor
 \begin{align*}
 	\frac{d\gamma}{dt}|_p[f] = \frac{d}{dt}(f \circ \gamma) |_{t = 0}
 \end{align*}
+
+For $f : M \to \R$ we have $\frac{d f}{dt}$ is a fucntion from $M \to \R$ where we evaluate:
+
+\begin{align*}
+	\frac{df}{dt}|_p = X|_p[f]
+\end{align*}
+
+where $X = \frac{d \gamma}{dt}$
+
+$\gamma(t,q,v)$ for geodesic $\gamma$ is transport of $v \in T_qM$ along $\gamma$ by time t? Note that $\gamma$ is unique geodesic determined by $v$ in given direction. Ie. $\gamma_v(0) = p$. Only locally defined(relying on ODE theory).
+
+*u,v seem to be standard coordinates for surface, s parameterization
+
+$\frac{ds}{du}$ is VF on s tangent to curves for fixed $v_0$. 
 
 \section{Proofs}
 
@@ -115,6 +137,16 @@ For curve $\gamma$, $\frac{d\gamma}{dt}$ is a Vector Field. Gives the vector cor
 	Let $(\m,g)$ be a Riemanian manifold. Then $\exists$ a unique affine connection $\nabla$ which is compatible with $g$ and symmetric. Such connection is called Riemann connection.
 \end{prop}
 
+\begin{prop}
+	Symmetry lemma
+	\begin{align*}
+		\frac{D }{\del v} \frac{\del s}{\del u} = \frac{D}{\del u} \frac{\del s}{\del v}
+	\end{align*}
+\end{prop}
+
+\begin{proof}
+	
+\end{proof}
 
 \end{document}
 
