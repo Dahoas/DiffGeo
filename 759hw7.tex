@@ -1,0 +1,235 @@
+\documentclass[11pt]{article}
+%you can look for fun LaTeX packages to use hereasdf
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{amsthm}
+
+\usepackage{graphicx}
+\usepackage{dcolumn}
+\usepackage{bm}
+
+%fun commands for fun sets
+%make sure to use these in math mode
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\m}{\mathcal{M}}
+\newcommand{\Tt}{\mathcal{T}}
+\newcommand{\pa}{\partial}
+\newcommand{\Dd}{\mathcal{D}}
+\newcommand{\del}{\partial}
+
+
+
+\oddsidemargin0cm
+\topmargin-2cm    
+\textwidth16.5cm   
+\textheight23.5cm  
+
+\newcommand{\question}[2] {\vspace{.25in} \hrule\vspace{0.5em}
+\noindent{\bf #1: #2} \vspace{0.5em}
+\hrule \vspace{.10in}}
+\renewcommand{\part}[1] {\vspace{.10in} {\bf (#1)}}
+
+\newcommand{\myname}{Alex Havrilla}
+\newcommand{\myandrew}{alumhavr}
+\newcommand{\myhwnum}{Hw 7}
+
+\newtheorem{prop}{Prop}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+ 
+\pagestyle{fancyplain}
+\lhead{\fancyplain{}{\textbf{HW\myhwnum}}}      % Note the different brackets!
+\rhead{\fancyplain{}{\myname\\ \myandrew}}
+\chead{\fancyplain{}{\mycourse}}
+
+\linespread{1.3}
+
+\begin{document}
+
+\medskip                        
+
+\thispagestyle{plain}
+\begin{center}
+
+{\myname}
+
+\myandrew
+
+\myhwnum
+
+\end{center}
+
+\question{Question 1}
+
+\begin{prop}
+	Let M be a riemanian manifold with sectional curvature identically zero. Then for every $p \in M$ the mapping
+	\begin{align*}
+		exp_p : B_{\epsilon}(0) \subseteq T_p M \to B_{\epsilon}(p)
+	\end{align*}
+	is an isometry where $B_{\epsilon}(p)$ is a normal ball. 
+\end{prop}
+
+\begin{proof}
+
+	The idea is to establish an isometry by calculating solutions to a jacobi field satisfying $\frac{d^2 J}{dt^2}$ via 0 sectional curvature.	
+
+	Let arbitrary $p \in M$. We show $exp_p$ is an isometry. This is clearly a diffeomorphism so suffices to show riemannian metric is preserved. 
+
+	Consider $v \in B_{\epsilon}(0)$ with $\hat{v} \in T_vT_pM$. Set
+	\begin{align*}
+		\gamma_s(t) = exp_p(t(v+s\hat{v})) 
+	\end{align*}
+	Then $J(t) = \frac{d\gamma_s}{ds}|_{s=0}$ is a jacobi field s.t. $J(t) = (d exp_p)(t\hat{v})$
+	%How do we even compute this?
+
+	Because we have 0 sectional curvature we know a jacobi field satisfies $\frac{d^2J}{dt^2} = 0$ via the jacobi equation. 
+
+	Set an ON frame $E_i$ an ON frame at $T_pM$ extended via parallel transport. Write $J(t) = a^i E_i$ and $\hat{v} = \hat{v}^i E_i$ where we identify tangent spaces of tangent spaces with the tangent space. Then since $\frac{d^2 J}{dt^2} = 0$ we know $J(t) = (\hat{v}^i t)E_i(t)$ because $\frac{d^2 J}{dt^2} = (a^i)''(t)E_i(t)$ with $\frac{DJ}{dt}(0) = \hat{v}$. 
+	%How do we show this?
+	Then $\hat{v}^iE_i(1) = (dexp_p)(\hat{v})$. This allows us to compute for additional $\hat{u} \in T_vT_pM$ 
+	\begin{align*}
+		\langle (d exp_p)(\hat{u}),(d exp_p (\hat{v})) \rangle = \hat{u}^i \hat{v}^j \langle E_i(1),E_j(1)\rangle = \langle \hat{u},\hat{v}\rangle
+	\end{align*}
+
+	which establishes an isometry.
+\end{proof} 
+
+\question{Question 2}
+
+\begin{prop}
+	Let M be a Riemannian manifold, $\gamma : [0,1] \to M$ a geodesic, and J a jacobi field along $\gamma$. Then there exists a parameterized surface $f(t,s)$ where $f(t,0) = \gamma(t)$ and curves $t \to f(t,s)$ are geodesics s.t. $J(t) = \frac{df}{ds}(t,0)$
+\end{prop}
+
+\begin{proof}
+	%Ideas: Define f by radiating geodesics outward exp_\lambda(s) tW(s) along vertical line
+
+	The idea is to construct f by flowing geodesics out along a "vertical" strip.
+
+	Choose curve $\lambda(s)$ in M s.t. $\lambda(0) = \gamma(0)$ with $\lambda'(0) = J(0)$. Along $\lambda$ choose vector field $W(s)$ with $W(0) = \gamma'(0)$, $\frac{DW}{ds}(0) = \frac{DJ}{dt}(0)$. We set $f(s,t) = exp_{\lambda(s)} tW(s)$. This defines a parameterized surface. We show the curves are geodesics on it. 
+
+	We know $\frac{d\lambda}{ds} = \lambda'(0) = J(0)$. Further we also have $\frac{df}{ds}(0,0) = \lambda'(0)$ since $\frac{df}{ds}(0,0) = \frac{d}{ds}|_{s=0}exp_{\lambda(s)}(0) = \frac{d}{ds}|_{s=0} \lambda(s) = \lambda'(s)$. 
+	%Using principle of subsitution to simplify things
+
+	We also show
+	\begin{align*}
+		\frac{D}{dt}\frac{df}{ds} (0,0) = \frac{D}{ds}\frac{df}{dt}(0,0) = \frac{DW}{ds}(0) = \frac{DJ}{dt}(0)
+	\end{align*}
+
+	We know by construction the third equality holds. The first equality holds by the symmetry lemma. Then we show the second holds.
+
+	Compute 
+	%Don't really know why these derivative relations hold but oh well?
+	\begin{align*}
+		\frac{D}{ds}\frac{df}{dt}(0,0) = \frac{D}{ds}|_{s=0}[\frac{d}{dt}|_{t=0} exp_{\lambda(0)}tW(s)] = \frac{D}{ds}|_{s=0}[W(s)] = \frac{DW}{ds}(0)
+	\end{align*}
+	%This probably isn't very rigorous
+
+	This establishes the interesting curves and further $J(t) = \frac{df}{ds}(t,0)$ via the initial conditions we've shown. Thus we finish the proof.
+\end{proof}
+	
+\question{Question 3}
+
+\begin{prop}
+	Let M be a Riemannian manifold with non-postive sectional curvature. Then for all p, the conjugate cut locus $C(p)$ is empty.
+\end{prop}
+
+\begin{proof}
+	Fix geodesic $\gamma : [0,a] \to M$ with $\gamma(0) = p \in M$. Suppose we have non-trivial $J$ jacobi field on $\gamma$ with $J(0) = J(a) = 0$. We have the jacobi equation:
+	\begin{align*}
+		0 = \frac{D^2 J}{dt^2} + R(\gamma',J)\gamma'
+	\end{align*}
+
+	which tells us 
+	\begin{align*}
+		\frac{d}{dt}\langle \frac{DJ}{dt},J\rangle = \langle \frac{D^2J}{dt^2},J\rangle + \langle \frac{DJ}{dt},\frac{DJ}{dt}\rangle \geq 0
+	\end{align*}
+
+	since cleary the second term is nonnegative and the first term is equal to the negation of sectional curvature via the jacobi equation, where we know sectional curvature nonpositive.
+
+	But then since $J(0) = J(a) = 0$ it must be $\langle DJ dt,J\rangle = 0$. Then with $\frac{d}{dt} \langle J,J\rangle = 2 \langle DJ/dt,J\rangle = 0$ it must be J is 0.
+\end{proof}
+
+\question{Question 4}
+
+Let M be a riemannian manifold of dimension two(so M is a surface). Let $B_{\delta}(p)$ be a normal ball around the point $p \in M$. Consider the parameterized surface 
+	\begin{align*}
+		f(\rho,\theta) = exp_p (\rho v(\theta))
+	\end{align*}
+	where $v(\theta)$ is a circle of radius $\delta$ in $T_p M$ parameterized by the central angle $\theta$
+
+\begin{prop}
+	$(\rho,\theta)$ are coordinates in an open set $U$ formed by open ball $B_{\delta}(p)$ minus ray $exp_p(-\rho v(0))$ with $0 < \rho < \delta$. These are polar coordinates
+\end{prop}
+
+\begin{proof}
+	Inuitively $v(\theta)$ gives the direction we flow and $\rho$ gives the distance we flow(from p). 
+
+	We know $exp_p$ diffeomorphic from ball in $T_pM$ around 0 to $B_{\delta}(p)$. The uniqueness of coordinates is given by the uniqueness of geodesics. 
+
+	The ray $exp_p(-\rho v(0))$ for $0 < \rho < \delta$ is not included because $-\pi,\pi$ are not valued.
+\end{proof}
+
+\begin{prop}
+	$g_{ij}$ of the riemannian metric are $g_{12} = 0$, $g_{11} = |\frac{df}{d\rho}|^2 = |v(\theta)|^2 = 1$ and $g_{22} = |\frac{df}{d\theta}|^2$
+\end{prop}
+
+\begin{proof}
+	Recall $g_{ij} = \langle \frac{d}{dx_i},\frac{d}{dx_j}\rangle$. Gauss's lemma tells us 
+	\begin{align*}
+		\langle (dexp_p)_v(v),(d exp_p)_v(w) \rangle  = \langle v,w\rangle
+	\end{align*}
+
+	Use this to compute
+	%All info about coordinates taken care of by considering d/d \rho, d/d \theta
+	\begin{align*}
+		g_{11} = \langle \frac{d}{d \rho}, \frac{d}{d \rho}\rangle = \langle \frac{d f}{d \rho}, \frac{d f}{d \rho}\rangle = |\frac{d f}{d \rho}|^2
+	\end{align*}
+
+	by definition. Similarly $g_{22} = |\frac{d f}{d\theta}|^2$.
+
+	\begin{align*}
+		g_{12} = \langle \frac{d}{d \rho}, \frac{d}{d \theta} \rangle = 0 
+	\end{align*}
+
+	similarly and finally%why?
+
+	\begin{align*}
+		|\frac{df}{d\rho}|^2 = |\frac{d}{dt}|_{t=0}(exp_p)((\rho + t)v(\theta))|^2 = |v(\theta)|^2 = 1
+	\end{align*}
+	%Why?
+
+\end{proof}
+
+\begin{prop}
+	Along the geodesic $f(\rho,0)$ we have
+	$(\sqrt{g_{22}})_{\rho \rho} = -K(p)\rho + R(\rho)$ where $lim_{\rho \to 0} \frac{R(\rho)}{\rho} = 0$ and $K(p)$ is the sectional curvature of M at p
+\end{prop}
+
+\begin{proof}
+	Let $f(\rho,0)$ be $\gamma(\rho)$. Note $\frac{df}{d\theta}$ is a jacobi field. %why? - has functional form 
+	$g_{22}=|\frac{df}{d\theta}|^2$ can be taylor expanded as $\rho^2 - (1/3)K(\rho,\sigma)\rho^4 + ... G(\rho)$. But we need $\sqrt{g_{22}}$ so we taylor expand to get $\sqrt{g_{22}} = \rho - (1/6)K(\rho,\sigma)\rho^3 + ... R(\rho)$ which we get by noting $\sqrt{g_{22}} * \sqrt{g_{22}} = g_{22}$ and collecting terms. Differentiating and noting $R''(\rho)$ is small gives the desired result. 
+
+	Writing $\sqrt{g_{22}}_{\rho \rho}s$ out for the next problem:
+	\begin{align*}
+		\sqrt{g_{22}}_{\rho \rho} = -K(\rho,\sigma)\rho + R''(\rho)
+	\end{align*}
+\end{proof}
+
+\begin{prop}
+	$lim_{\rho \to 0} \frac{\sqrt{g_{22}}_{\rho \rho}}{\sqrt{g_{22}}} = - K(p)$
+\end{prop}
+
+\begin{proof}
+	This follows directly from the above proposition and a taylor expansion for $\sqrt{g}_{22}$
+\end{proof}
+
+%This shows gaussian curvtaure is same as sectional curvature in two dimensions
+	
+\end{document}
+

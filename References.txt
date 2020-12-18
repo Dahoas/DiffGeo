@@ -1,0 +1,37 @@
+
+
+Homework 7:
+
+	Problem 1: https://math.stackexchange.com/questions/1173648/zero-sectional-curvature-implies-exp-is-a-local-isometry
+
+	https://math.stackexchange.com/questions/1832106/sectional-curvature-of-2-manifold
+
+	https://math.stackexchange.com/questions/1173648/zero-sectional-curvature-implies-exp-is-a-local-isometry
+
+	https://math.stackexchange.com/questions/3569346/question-about-exercise-5-2b-of-do-carmos-riemannian-geometry
+
+Homework 8:
+
+https://math.stackexchange.com/questions/2324605/exercise-6-2-of-do-carmo-riemannian-geometry
+
+http://www2.math.uu.se/~astrombe/riemanngeometri2017/problems_fin_nohrefs.pdf
+
+https://www.maths.dur.ac.uk/~dma0np/riemgeom1011/riemgeom.html
+
+https://math.stackexchange.com/questions/1520790/curvature-on-product-riemannian-manifolds
+
+https://math.stackexchange.com/questions/1058462/sectional-curvature-of-product-metric
+
+https://math.stackexchange.com/questions/1067193/covariant-derivative-of-vector-field-along-itself-nabla-x-x
+
+https://issuu.com/zhangzujin/docs/do_carmo________________________
+
+https://www.math.colostate.edu/~clayton/courses/660/660_12.pdf
+
+http://www.math.sjsu.edu/~simic/Fall06/Math113/113.html
+
+https://math.berkeley.edu/~hutching/teach/140-2019/
+
+https://math.stackexchange.com/questions/258017/geodesics-on-the-product-of-manifolds
+
+https://math.stackexchange.com/questions/1058462/sectional-curvature-of-product-metric

@@ -1,0 +1,244 @@
+\documentclass[11pt]{article}
+%you can look for fun LaTeX packages to use hereasdf
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{amsthm}
+
+\usepackage{graphicx}
+\usepackage{dcolumn}
+\usepackage{bm}
+
+%fun commands for fun sets
+%make sure to use these in math mode
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\m}{\mathcal{M}}
+\newcommand{\Tt}{\mathcal{T}}
+\newcommand{\pa}{\partial}
+\newcommand{\Dd}{\mathcal{D}}
+\newcommand{\del}{\partial}
+
+
+
+\oddsidemargin0cm
+\topmargin-2cm    
+\textwidth16.5cm   
+\textheight23.5cm  
+
+\newcommand{\question}[2] {\vspace{.25in} \hrule\vspace{0.5em}
+\noindent{\bf #1: #2} \vspace{0.5em}
+\hrule \vspace{.10in}}
+\renewcommand{\part}[1] {\vspace{.10in} {\bf (#1)}}
+
+\newcommand{\myname}{Alex Havrilla}
+\newcommand{\myandrew}{alumhavr}
+\newcommand{\myhwnum}{Hw 7}
+
+\newtheorem{prop}{Prop}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+ 
+\pagestyle{fancyplain}
+\lhead{\fancyplain{}{\textbf{HW\myhwnum}}}      % Note the different brackets!
+\rhead{\fancyplain{}{\myname\\ \myandrew}}
+\chead{\fancyplain{}{\mycourse}}
+
+\linespread{1.3}
+
+\begin{document}
+
+\medskip                        
+
+\thispagestyle{plain}
+\begin{center}
+
+{\myname}
+
+\myandrew
+
+\myhwnum
+
+\end{center}
+
+\question{Question 1}
+
+\begin{prop}
+	Show $x : \R^2 \to \R^4$ given by 
+	\begin{align*}
+		x(\theta,\phi) = \frac{1}{\sqrt{2}} (cos(\theta),sin(\theta),cos(\phi),sin(\phi)), (\theta,\phi) \in \R^2
+	\end{align*}
+	is an immersion
+\end{prop}
+
+\begin{proof}
+	
+	Clearly the image of $x$ lies in $S^3$. To show an immersion we just show the differential is injective. Compute
+	\[
+		dx(\theta,\phi) = 
+		\frac{1}{\sqrt{2}}
+		\begin{bmatrix}
+			-sin(\theta) & 0 \\
+			cos(\theta) & 0 \\
+			0 & -sin(\phi) \\
+			0 & cos(\phi)
+		\end{bmatrix}
+	\]
+
+	Which is clearly injective for all $\theta,\phi$. Note we've showed previously this a torus. So to conclude we show this has sectional curvature 0.
+
+	Recall we define 
+	\begin{align*}
+		K(x,y) = \frac{\langle R(x,y)x,y\rangle}{|x \wedge y|^2}
+	\end{align*}
+
+	We take the area formula to be 1 and compute for basis tangent vectors $\frac{d}{d\theta},\frac{d}{d\phi}$ using Gauss theorem
+	\begin{align*}
+		K(\frac{d}{d\theta},\frac{d}{d\phi}) &= \langle B(\frac{d}{d\theta},\frac{d}{d\phi}), B(\frac{d}{d\theta},\frac{d}{d\phi}) \rangle - |B(\frac{d}{d\theta},\frac{d}{d\phi})|^2 \\
+		&= \langle \overline{\nabla}_{\overline{\frac{d}{d\theta}}} \overline{\frac{d}{d\theta}} - \nabla_{d/d\theta}\frac{d}{d\theta},\overline{\nabla}_{\overline{\frac{d}{d\phi}}} \overline{\frac{d}{d\phi}} - \nabla_{d/d\phi}\frac{d}{d\phi} \rangle - |\overline{\nabla}_{\overline{d/d\theta}} \overline{\frac{d}{d\phi}} - \nabla_{d/d\theta} \frac{d}{d\phi}|^2\\
+		&= \langle \overline{\nabla}_{\overline{d/d\theta}} \overline{\frac{d}{d\theta}}, \overline{\nabla}_{d/d\phi}\overline{\frac{d}{d\phi}}\rangle - |\overline{\nabla} \overline{\frac{d}{d\phi}}|^2
+	\end{align*}
+
+	Further note $\nabla_{d/d\theta} \frac{d}{d\theta} = \nabla_{d/d\phi}\frac{d}{d\phi} = 0$ and $\nabla_{d/d\theta}\frac{d}{d\phi} = 0$. Further extending $d/d\theta$ we find $\overline{\nabla}_{\overline{d/d\theta}}\overline{\frac{d}{d\theta}} = 1/2 (-x_1,-x_2,0,0)$ and similarly for $d/d\phi$. 
+
+	We then have $\langle \overline{\nabla}_{\overline{d/d\theta}} \overline{\frac{d}{d\theta}}, \overline{\nabla}_{d/d\phi}\overline{\frac{d}{d\phi}}\rangle - |\overline{\nabla} \overline{\frac{d}{d\phi}}|^2 = \langle -(x_1,-x_2,0,0),(0,0,-x_3,-x_4) \rangle -0 = 0$ to conclude the proof
+
+\end{proof}
+
+\question{Question 2}
+
+\begin{prop}
+	Prove that the sectional curvature of the Riemannian manifold $M = S^2 \times S^2= M_1 \times M_2$ with the product metric, where $S^2$ is the unit sphere in $\R^3$, is non-negative. Find a totally geodesic, flat torus, $T^2$, embedded in $S^2 \times S^2$.
+\end{prop}
+
+\begin{proof}
+	We know our product metric defined as $\langle (X_1,X_2),(Y_1,Y_2)\langle_M = \langle X_1,Y_1 \rangle_{M_1} + \langle X_2,Y_2 \rangle_{M_2}$. We know $M_1,M_2$ have constant sectional curvature. Let $X_1,..,X_m$ basis of open set in M and $Y_1,...,Y_n$ basis of open set in $N$. Note we have $\nabla_{X_i}Y_j = \nabla_{Y_j}X_i = 0$ in where $\nabla$ is the corresponding riemannian connection to the product metric. Then we see for $u,v,w$ which are written as a sum of both $X_i$ and $Y_i$, the curvature tensor $R(u,v)w$ is 0 since we have $R(u,v)w = \nabla_u \nabla_v w - \nabl_v\nabla_u w + \nabla_{[u,v]}w$. Then since $S^2$ has nonnegative curvature, $S^2 \times S^2$ has nonnegative curvature, since it is otherwise 0.
+
+	Now we consider $S^1 \times S^1$ embedded in $S^2 \times S^2$ flat and totally geodesic. The total geodesic part is clear since locally at each point $S^1$ is a geodesic in $S^2$. Further it's also flat via an argument to the above. Thus the product is totally geodesic follows from problem 4 in chapter 6.
+\end{proof}
+
+
+\question{Question 3}
+
+Let $x$ be the immersion defined in Question 1.
+
+\begin{prop}
+	The vectors $e_1 = (-sin(\theta),cos(\theta),0,0)$ and $e_2 = (0,0,-sin(\phi),cos(\phi))$ form an orthonormal basis of the tangent space, and that the vectors $n_1 = \frac{1}{\sqrt{2}} (cos(\theta),sin(\theta),cos(\phi),sin(\phi))$ with $n_2 = \frac{1}{\sqrt{2}} (-cos(\theta),-sin(\theta),cos(\phi),sin(\phi))$ form an orthonormal basis of the normal space
+\end{prop}
+
+\begin{proof}
+	First note under the metric inherited from $\R^4$. $e_1$ and $e_2$ are orthnormal. Further note $e_1 = \frac{d}{d\theta}$ and $e_2 = \frac{d}{d\phi}$ and hence span the tangent space. 
+
+	Further we have $n_1,n_2$ orthonormal under the inerited metric. They are also orthogonal to $e_1,e_2$. We know the normal space is 2-dimensional and thus this constitutes a basis.
+\end{proof}
+
+
+\begin{prop}
+	We know $\langle S_{n_k}(e_i),e_j \rangle = -\langle \overline{\nabla}_{e_i} n_k,e_j\rangle = \langle \overline{\nabla}_{e_i} e_j, n_k\rangle$ where $\overline{\nabla}$ is covariant derivative of $\R^4$ and $i,j,k = 1,2$. Then we claim the matrices of $S_{n_1}$ and $S_{n_2}$ with respet to the basis $\{e_1,e_2\}$ are
+	\[
+		\begin{bmatrix}
+			-1 & 0\\
+			0 & -1
+		\end{bmatrix}
+	\]
+	\[
+		\begin{bmatrix}
+			1 & 0\\
+			0 & -1
+		\end{bmatrix}
+	\]
+\end{prop}
+
+\begin{proof}
+	Recall the shape operator can be written as 
+	\begin{align*}
+		S_{\eta}(x) = -(\overline{\nabla}_X \overline{\eta})^T
+	\end{align*}
+	for $\eta \in T_pM^{\perp}$ and $x \in T_pM$. Then we compute
+	\begin{align*}
+		\langle S_{n_1}(e_1),e_1\rangle &= \langle \overline{\nabla}_{e_1}e_1,n_1\rangle = \langle \overline{\nabla}_{\sqrt{2}\frac{d}{d\theta}} \sqrt{2}\frac{d}{d\theta},n_1 \rangle \\
+		&= \langle (-cos(\theta),-sin(\theta),0,0), \frac{1}{\sqrt{2}}(cos(\theta),sin(\theta),cos(\phi),sin(\phi))\rangle \\
+		&= -1
+	\end{align*}
+	
+	where we recall $e_1 = \sqrt{2}\frac{d}{d\theta}$. The rest of the computations follow similarly.
+
+\end{proof}
+
+
+\begin{prop}
+	$x$ is a minimal immersion
+\end{prop}
+
+\begin{proof}
+	We know minimality is equivalent to having 0 mean curvature. Clearly the trace of $S_{n_2}$ is 0, ie the sum of the eigenvalues. Further we know $n_2$ is orthogonal to $T_pT^2$ since $n_1$ orthogonal to $S^3$, establishing 0 mean curvature since $S_{n_2}$ is the corresponding shape operator and thus minimality. 
+\end{proof}
+
+
+
+\question{Question 4}
+
+Let $f : \overline{M}^{n+1} \to \R$ be a differentiable function. Let \textit{Hessian}, $Hess(f)$ of f at $p \in \overline{M}$ as the linear operator $Hess(f)Y = \overline{\nabla}_Y grad(f)$ for $Y \in T_p \overline{M}$. Let a be a regular value of f and $M^n \subseteq \overline{M}^{n+1}$ be the hypersurface in $\overline{M}$ defined by $M = \{p \in \overline{M};f(p) = a\}$. 
+
+\begin{prop}
+	The laplacian $\overline{\Delta} f$ is given by $\overline{\Delta} f = trace(Hess(f))$
+\end{prop}
+
+\begin{proof}
+	For $p \in \overline{M}$ we let $E_i$ be an orthonormal basis of $T_p\overline{M}$. Then compute 
+	\begin{align*}
+		\overline{\Delta} f = div_{\overline{M}} \overline{\nabla} f = \sum_i \langle \overline{\nabla}_{E_i} \overline{\nabla} f, E_i \rangle = \sum_i \langle Hess(f) E_i,E_i\rangle = trace(Hess(f))
+	\end{align*}
+\end{proof}
+
+\begin{prop}
+	If $X,Y \in X(\overline{M})$ then $\langle Hess(f) Y,X\rangle = \langle Y,Hess(f) X\rangle$. Then $Hess(f)$ is self-adjoint and determines symmetric bilinear form via $Hess(f)(X,Y) = \langle Hess(f)X,Y\rangle$.
+\end{prop}
+
+\begin{proof}
+	Compute
+	\begin{align*}
+		\langle Hess(f) Y,X \rangle &= \langle \overline{\nabla}_Y \overline{\nabla} f, X \rangle = Y \langle \overline{\nabla} f,X\rangle - \langle \overline{\nabla} f,\overline{\nabla}_Y X\rangle \\
+		&= YX[f] - (\overline{\nabla}_Y X)[f]  = XY[f] - (\overline{\nabla}_Y X)[f] = \langle Y,Hess(f)X\rangle
+	\end{align*}
+
+	This shows $Hess(f)$ self adjoint and we can then defines the symmetric bilinear form given above, where symmetry comes from self-adjointness.
+\end{proof}
+
+\begin{prop}
+	The mean curvature H of $M \subseteq \overline{M}$ is given by
+	\begin{align*}
+		nH = -div(\frac{grad(f)}{|grad(f)|})
+	\end{align*}
+\end{prop}
+
+\begin{proof}
+	We again fix orthonormal vector fields $E_i$ and compute for $\eta = \overline{\nabla}f$ which we wlog assume to have norm 1, 
+	\begin{align*}
+		nH &= trace(S_{\eta}) = \sum_i \langle S_{\eta}(E_i),E_i\rangle = \sum_i \langle \overline{\nabla}_{\eta}\eta,\eta\rangle - \langle \overline{\nabla}_{E_i}\eta,E_i\rangle \\
+		&= -\sum_i \langle \overline{\nabla}_{E_i} \eta,E_i\rangle = -div_{\overline{M}} \eta = -div(\overline{\nabla}f)
+	\end{align*}
+
+	%Why?
+
+\end{proof}
+
+\begin{prop}
+	We know every embedded hypersurface $M^n \subseteq \overline{M}^{n+1}$ is locally the inverse image of a regular value. Then the mean curvature H of such a hypersurface is given by $H = -\frac{1}{n} div(N)$ where N is local extension of unit normal vector field on $M^n$.
+\end{prop}
+
+\begin{proof}
+	We can use implicit function theorem then calculate for the corresponding f,
+	\begin{align*}
+		\langle \overline{\nabla} f,\frac{d}{dx_i}\rangle = \frac{d}{dx_i} [f] = 0
+	\end{align*}
+
+	for $i \in [n]$ and then we can conclude $H = (-1/n)div(\overline{\nabla}f) = (-1/n)div(N)$ for some extension N.
+\end{proof}
+	
+\end{document}
+

@@ -37,9 +37,6 @@
 \newcommand{\myandrew}{alumhavr}
 \newcommand{\myhwnum}{Hw 2}
 
-\newtheorem{prop}{Prop}
-\newtheorem{defn}{Definition}
-\newtheorem{rem}{Remark}
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{5pt plus 1pt}
@@ -52,6 +49,18 @@
 \linespread{1.3}
 
 \begin{document}
+
+\newtheorem{prop}{Prop}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{defi}{Def}
+\newtheorem{apps}{Application}
+\newtheorem{quest}{Question}
+\newtheorem{ans}{Answer}
+\newtheorem{interest}{Interesting}
+\newtheorem{theme}{Theme}
+\newtheorem{theorem}{Theorem}
+\newtheorem{example}{Example}
 
 
 \medskip                        
@@ -191,7 +200,216 @@ along $\gamma(t) = exp_p(tv)$
 	Killing fields flows preserve orientation of vectors at points. Flow smoothly(diffeomorphism assumption).
 \end{rem}
 
+\section{Jacobi Fields}
 
+\begin{remark}
+	A jacobi field is a vector field along a geodesic $\gamma$ which corresponds to a perturbation of $\gamma$ in the space of geodesics.
+
+	Also can be thought of as tanget vectors in space of geodesics(along a geodesic).
+\end{remark}
+
+\begin{theme}
+	Formalizes connection between curvature and geodesics
+\end{theme}
+
+\begin{defi}
+	$(d exp_p)_{tv}(tw) = \frac{df}{ds}(t,0)$ along $\gamma(t) = exp_p(tv)$ where $f(t,s) = exp_p t v(s)$
+\end{defi}
+
+\begin{remark}
+	$(d exp_p)_{tv}$ map from tangent space of tangent space to tangent space of tangent space 
+\end{remark}
+
+\begin{defi}
+	$0 = \frac{D^2 J}{dt^2} + R(\gamma'(t),J(t))\gamma'(t)$
+\end{defi}
+
+\begin{remark}
+	Curvatue indicates spread of geodesics
+\end{remark}
+
+\begin{prop}
+	Jacobi field is determined by initial conditions $J(0),\frac{DJ}{dt}(0)$. 
+\end{prop}
+
+\begin{proof}
+	Let $e_1(t),...,e_n(t)$ parallel orthonormal fields along $\gamma$. Write
+	\begin{align*}
+		J(t) = \sum_i f_i(t) e_i(t)
+	\end{align*}
+	with $a_{ij} = g(R(\gamma'(t),e_i(t))\gamma'(t),e_j(t))$
+
+	Then $\frac{D^2 J}{dt^2} = \sum_i f_i''(t)e_i(t)$ and $R(\gamma',J)\gamma' = \sum_j g(R(\gamma',J)\gamma',e_j)e_j = \sum_{i,j} f_i a_{i,j}e_j$
+
+	since the $e_i$ parallel.
+
+	Jacobi eqution equivalent to $f_j''(t) + \sum_i a_{ij}(t)f_i(t) = 0$ which is a linear second order system.
+
+	Thsu given initial conditions we have $2n$ linearly separable independent jacobi fields along $\gamma$. 
+\end{proof}
+
+\begin{theme}
+	A lot of these things connected to DEs on the manifold(I guess point of differentials).
+\end{theme}
+
+\begin{prop}
+	Let M have constant sectional curvature K. $\gamma : [0,l] \to M$ be a geodesic arclength parameterized. Let J jacobi field normal to $\gamma'$. 
+
+	Then $R(\gamma',J)\gamma' = KJ$ ie. curvature of $\gamma',J$ along $\gamma'$ is just $KJ$ ie. multiple of J. J describes turning away of $\gamma$. In some sense an eigenvalue of the curvature. 
+\end{prop}
+
+\begin{proof}
+	For all $T$ along $\gamma$ we have
+	\begin{align*}
+		g(R(\gamma',J)\gamma',T) = K(g(\gamma',\gamma')g(J,T) - g(\gamma',T)g(J,\gamma'))
+	\end{align*}
+
+	why??? - I think becaue we have 0 sectional curvature so we have this form for the curvature.
+
+	This equals $Kg(J,T)$ as terms cancel via unit norm and parallelism.
+\end{proof}
+
+\begin{example}
+	Set $M = \R^2$ with $\gamma(t) = (t,0)$. $w(t) = (0,1)$. Then $J(t) = (0,t)$. 
+
+	Showing existence of jacobi field satisfying general form(with 0 sectional curvature).
+\end{example}
+
+\begin{theme}
+	Typically focus on jacobi fields normal to curve. 
+\end{theme}
+
+\begin{prop}
+	Can taylor expand $|J(t)|^2$. Involves curvature
+
+	$|J(t)|^2 = t^2 - (1/3)g(R(v,w)v,w)t^4 + ...$
+
+	Notice involves sectional curvature $K(v,w) = g(R(v,w)v,w)$
+\end{prop}
+
+\begin{proof}
+	Know $J(0) = 0$ with $J'(0) = w$. So 
+	\begin{align*}
+		&g(J,J)(0) = 0\\
+		&(g(J,J))'(0) = 2g(J,J')(0) = 0 \text{ via a product rule likely}\\
+		& (g(J,J))''(0) = 2g(J',J')(0) + 2 g(J'',J)(0) = 2 \text{ since second term cancels(parallelism?)}
+	\end{align*}
+
+	Last expression also probably comes from DE
+
+	Via the DE also get third order term 0 and fourth order term $8g(J',J''')(0)$
+
+	We have
+	\begin{align*}
+		J'''(0) = -\frac{D}{dt}|_{t =0}(R(\gamma'(t),J(t))\gamma'(t))
+	\end{align*}
+
+	via DE. Substituting this into expression gives us what we want.
+
+
+\end{proof}
+
+\begin{remark}
+	\textbf{Geometric Interpretation:}
+
+	Geodesics $t \to exp_p(tv(s))$ spread from $t \to exp_p(tv)$ at a rate which differs from that of flat space by $\approx-1/6 K(p,\sigma)t^3$.
+\end{remark}
+
+\subsection{Conjugate Points}
+
+\begin{remark}
+	Conjugate point sinks for tangent geodesics along $\gamma$
+\end{remark}
+
+\begin{example}
+	Consdier $\mathbb{S}^2$. Antipodes conjugate along $(cos(t),sin(t),0)$ for $t \in [0,\pi]$ with $J(t) = (0,0,sin(t))$
+\end{example}
+
+\begin{example}
+	Cut locus of $p \in S^n$ is $\{-p\}$
+\end{example}
+
+\begin{prop}
+	A point $q = \gamma(t_0)$ is conjugate to p along $\gamma \iff$ $v_0 : = t_0 \gamma'(0)$ is a critical point of $exp_p$. also $mult = dim(ker((d exp_p)_{v_0}))$
+\end{prop}
+
+\begin{proof}
+	We say $q$ conjugate $\iff$ we can find a J s.t. $J(0) = J(t_0) = 0$. We set $v = \gamma'(0)$ and $w = J'(0)$. 
+
+	We know $J(t) = (dexp_p)_{tv}(tw)$. So $0 = ((dexp_p)_0)(0) = (dexp_p)_{t_0v}(t_0 w)$ 
+\end{proof}
+
+\begin{prop}
+	$g(J,\gamma') = g(J'(0),\gamma'(0))t + g(J(0),\gamma'(0))$
+\end{prop}
+
+\begin{proof}
+	Compute
+	
+		$g(J',\gamma')' = g(J'',\gamma')$ \text{Because \gamma'' parallel J'?}
+		$= -g(R(\gamma',J)\gamma',\gamma')= 0$ \text{ because we know curvature is constant multiple of gamma'}
+	
+\end{proof}
+
+\section{Complete Manifolds}
+
+\begin{remark}
+	Covering map covers each open set with image of disjoint open sets on which f is a diffeomorphism(f locally a diffeomorphism on open sets)
+\end{remark}
+
+\begin{remark}
+	The manifold is extendible if it can be isometrically emebedded in larger space(open).
+\end{remark}
+
+\begin{example}
+	Torus geodesically complete, $\mathbb{R}^n$ geodesically complete, $B(0,1)$ not complete since geodesic runs out of manifold.
+\end{example}
+
+\begin{prop}
+	If M is extendible then it is not geodesically complete. 
+\end{prop}
+
+\begin{proof}
+	Suppose M extendible. Then $M \subseteq M'$. Since $M' \backslash M$ is not open(since M' connected) we can find $p \in \partial M = \overline{M}\backslash M$. Let U be normal neighborhood of p. Let $q \in U \cap M$. Then we can find geodesic $\gamma$ from p to q. But this is not in $M$.
+
+	Ie. just look at boundary and find normal neighborhood. 
+\end{proof}
+
+\begin{theorem}
+	\textit{Hopf-Rinow}
+\end{theorem}
+
+\begin{proof}
+	Need to show $i) \implies *$ and $i) \iff ii) \iff iii) \iff iv)$
+\end{proof}
+
+\section{Isometric Immersions}
+
+\begin{prop}
+	For $f : M \to \overline{M}$ isometric immersion, we know $T_{f(p)} f(M) \subseteq T_{f(p)} \overline{M}$ and then $V = V^T + V^N$ where $V^T \in T_{f(p)}f(M)$ and $V^N$ orthogonal ie. $\overline{g}(V^T,V^N) = 0$.
+\end{prop}
+
+\begin{remark}
+	Can decompose tangent space of $T_p\overline{M}$ as direct sum with tangent space of sub-isometric immersion
+\end{remark}
+
+\begin{defi}
+	$B(X,Y) = \overline{\nabla}_{\overline{X}} \overline{Y} - \nabla_X Y$ which is in $(T_p M)^{\perp}$ where $\overline{X},\overline{Y}$ extensions
+\end{defi}
+
+\begin{remark}
+	We measure change in $\overline{Y}$ against change in Y.
+\end{remark}
+
+
+
+
+
+\section{Confusions}
+
+\begin{question}
+	Don't have a very good understanding of how to convert bewteen derivatives? Example: look at hw 7.3 computations
+\end{question}
 
 \end{document}
 
